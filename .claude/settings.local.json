@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find C:UsersJaymeDocumentsGithubACM-GameJamSpring26-Limbo -type f \\\\\\(-name *.gd -o -name *.tscn -o -name *.tres \\\\\\))"
+    ]
+  }
+}
