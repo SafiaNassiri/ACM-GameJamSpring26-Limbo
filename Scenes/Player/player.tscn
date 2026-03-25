@@ -454,5 +454,3 @@ shape = SubResource("RectangleShape2D_0u5uq")
 position = Vector2(-0.5, 2)
 shape = SubResource("RectangleShape2D_jlvik")
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=444587554]
-process_callback = 0
