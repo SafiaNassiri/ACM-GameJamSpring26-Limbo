@@ -35,3 +35,7 @@ $RECYCLE.BIN/
 
 # Build output
 build/
+
+#Claude
+CLAUDE.md
+run_tests.sh
