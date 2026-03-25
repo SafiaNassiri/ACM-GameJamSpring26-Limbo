@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://b7jqmkp21xpjg"
+path="res://.godot/imported/21 - Dungeon.ogg-c8ee84b64e16338729ce2325c910303a.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/Sprites/Ninja Adventure - Asset Pack/Audio/Musics/21 - Dungeon.ogg"
+dest_files=["res://.godot/imported/21 - Dungeon.ogg-c8ee84b64e16338729ce2325c910303a.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

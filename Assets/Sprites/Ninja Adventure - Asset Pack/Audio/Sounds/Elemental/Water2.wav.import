@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bvcwbm35p8070"
+path="res://.godot/imported/Water2.wav-a2301da1cf4f114088fe4a2c446b88e7.sample"
+
+[deps]
+
+source_file="res://Assets/Sprites/Ninja Adventure - Asset Pack/Audio/Sounds/Elemental/Water2.wav"
+dest_files=["res://.godot/imported/Water2.wav-a2301da1cf4f114088fe4a2c446b88e7.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dg3hm12i5lrul"
+path="res://.godot/imported/Strange.wav-bd4c354178ba169b0163d6db6ee7a96b.sample"
+
+[deps]
+
+source_file="res://Assets/Sprites/Ninja Adventure - Asset Pack/Audio/Sounds/Magic & Skill/Strange.wav"
+dest_files=["res://.godot/imported/Strange.wav-bd4c354178ba169b0163d6db6ee7a96b.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

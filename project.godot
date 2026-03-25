@@ -17,7 +17,9 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 config/name="Limbo"
 run/main_scene="uid://djtxxd2s1u3g2"
 config/features=PackedStringArray("4.6", "GL Compatibility")
+boot_splash/image="uid://to8de2c3hjia"
 config/icon="res://icon.svg"
+boot_splash/minimum_display_time=3000
 
 [debug]
 
@@ -72,5 +74,3 @@ player_interact={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
-renderer/rendering_method="gl_compatibility"
-renderer/rendering_method.mobile="gl_compatibility"

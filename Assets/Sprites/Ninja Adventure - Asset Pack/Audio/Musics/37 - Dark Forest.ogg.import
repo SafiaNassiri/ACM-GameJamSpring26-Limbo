@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dlffwro12f7yw"
+path="res://.godot/imported/37 - Dark Forest.ogg-cb2bb2bf3d6ff99813b1839973052112.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/Sprites/Ninja Adventure - Asset Pack/Audio/Musics/37 - Dark Forest.ogg"
+dest_files=["res://.godot/imported/37 - Dark Forest.ogg-cb2bb2bf3d6ff99813b1839973052112.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

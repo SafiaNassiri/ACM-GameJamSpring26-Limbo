@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dock6yxv2ssj8"
+path="res://.godot/imported/WaveFar.wav-da8df210ceaf9c1dd6db12cf8c2c445b.sample"
+
+[deps]
+
+source_file="res://Assets/Sprites/Ninja Adventure - Asset Pack/Audio/Sounds/Ambient/WaveFar.wav"
+dest_files=["res://.godot/imported/WaveFar.wav-da8df210ceaf9c1dd6db12cf8c2c445b.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ga7ykd0o7k6s"]
 
-[ext_resource type="Texture2D" uid="uid://c0lsqpps8mn65" path="res://Sprites/Player/Player.png" id="1_uvnfx"]
+[ext_resource type="Texture2D" uid="uid://c0lsqpps8mn65" path="res://Assets/Sprites/Player/Player.png" id="1_uvnfx"]
 [ext_resource type="Script" uid="uid://c6kfbyl5ltbau" path="res://Scripts/Player/death_handler.gd" id="2_mtuoh"]
 [ext_resource type="Script" uid="uid://boepurcwamkb0" path="res://Scripts/Player/movement_handler.gd" id="3_htcer"]
 [ext_resource type="Script" uid="uid://bydf08pv45g4x" path="res://Scripts/Player/interaction_handler.gd" id="4_dd0ac"]
@@ -431,11 +431,11 @@ size = Vector2(11, 10)
 [node name="Player" type="CharacterBody2D" unique_id=525574470]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=662476842]
-texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_rcvs5")
-animation = &"idle_down"
+animation = &"run_up"
 autoplay = "idle_down"
-frame_progress = 0.29738653
+frame = 1
+frame_progress = 0.3800649
 
 [node name="DeathHandler" type="Node" parent="." unique_id=1343212533]
 script = ExtResource("2_mtuoh")
