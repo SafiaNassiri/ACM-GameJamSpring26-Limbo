@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://bb57v3itd50gl"]
 
 [ext_resource type="Texture2D" uid="uid://cxakw1ayglo1g" path="res://Assets/Sprites/Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetLogic.png" id="1_rws1m"]
-[ext_resource type="Script" path="res://Scripts/Props/RockPuzzle.gd" id="2_puzzle"]
+[ext_resource type="Script" uid="uid://b1eadhwyffr2r" path="res://Scripts/Props/RockPuzzle.gd" id="2_puzzle"]
+[ext_resource type="AudioStream" uid="uid://bv7bdw7eqfv16" path="res://Audio/RockMove.wav" id="3_x6sjl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e8yly"]
 size = Vector2(14, 16)
@@ -20,3 +21,4 @@ region_rect = Rect2(0, 80, 16, 16)
 shape = SubResource("RectangleShape2D_e8yly")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=2000000001]
+stream = ExtResource("3_x6sjl")
