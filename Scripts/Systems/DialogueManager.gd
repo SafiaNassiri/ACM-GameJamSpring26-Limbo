@@ -85,7 +85,7 @@ func _play_node(node_id: String) -> void:
 		if raw is Array:
 			line = _pick_line(raw, node.get("id", ""))
 		else:
-			line = raw
+			line = str(raw)
 		line = _interpolate(line)
 
 	var speaker: String = node.get("speaker", "")

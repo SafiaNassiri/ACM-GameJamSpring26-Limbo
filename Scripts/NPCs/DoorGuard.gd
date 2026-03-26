@@ -1,336 +1,116 @@
 extends Area2D
 
-## How often (seconds) Mr. Greene tosses out an unprompted comment.
+## How long (seconds) to wait before firing the next ambient line.
 @export var ambient_interval: float = 8.0
-## Randomness added to ambient interval so it doesn't feel robotic.
-@export var ambient_jitter: float = 4.0
 ## Prompt shown when player is in range.
 var prompt_text: String = "Talk to Mr. Greene"
 
 const AMBIENT_EVERY_N_FAILS: int = 3
 
 var _player_in_range: bool = false
-var _ambient_timer: float = 0.0
-var _next_ambient_time: float = 0.0
+var _ambient_pending: bool = false
+var _ambient_lines: Array[String] = []
 
 func _ready() -> void:
-	DialogueManager.register_script("door_guards", _build_script())
-	DialogueManager.dialogue_trigger.connect(_on_dialogue_trigger)
+    _load_dialogue_json()
+    DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 
-	body_entered.connect(_on_body_entered)
-	body_exited.connect(_on_body_exited)
+    body_entered.connect(_on_body_entered)
+    body_exited.connect(_on_body_exited)
 
-	_reset_ambient_timer()
+    # If the player starts inside the area, body_entered never fires — check manually.
+    await get_tree().physics_frame
+    for body: Node2D in get_overlapping_bodies():
+        _on_body_entered(body)
 
-func _process(delta: float) -> void:
-	if not _player_in_range or DialogueManager.is_open:
-		return
-	_ambient_timer += delta
-	if _ambient_timer >= _next_ambient_time:
-		_ambient_timer = 0.0
-		_reset_ambient_timer()
-		_fire_ambient()
+func _load_dialogue_json() -> void:
+    var file: FileAccess = FileAccess.open("res://Data/Dialogue/door_guard.json", FileAccess.READ)
+    if file == null:
+        push_warning("[DoorGuard] Could not open dialogue JSON")
+        return
+    var json: JSON = JSON.new()
+    if json.parse(file.get_as_text()) != OK:
+        push_warning("[DoorGuard] Failed to parse dialogue JSON: " + json.get_error_message())
+        return
+    var raw: Variant = json.data
+    if not raw is Dictionary:
+        return
+    @warning_ignore("unsafe_method_access")
+    var lines: Variant = raw.get("ambient_lines")
+    if lines is Array:
+        @warning_ignore("unsafe_method_access")
+        for item: Variant in lines:
+            _ambient_lines.append(str(item))
+    @warning_ignore("unsafe_method_access")
+    var nodes: Variant = raw.get("nodes")
+    if nodes is Dictionary:
+        DialogueManager.register_script("door_guards", {"nodes": nodes})
 
-func _reset_ambient_timer() -> void:
-	_next_ambient_time = ambient_interval + randf() * ambient_jitter
+func _on_body_entered(body: Node2D) -> void:
+    if not body.is_in_group("player"):
+        return
+    _player_in_range = true
+    if GameState.has_seen("proximity_first"):
+        DialogueManager.start_conversation("door_guards", "proximity_repeat")
+    else:
+        DialogueManager.start_conversation("door_guards", "proximity_first")
 
-func _on_body_entered(body: Node) -> void:
-	if not body.is_in_group("player"):
-		return
-	_player_in_range = true
-	_ambient_timer = 0.0
-	if GameState.has_seen("proximity_first"):
-		DialogueManager.start_conversation("door_guards", "proximity_repeat")
-	else:
-		DialogueManager.start_conversation("door_guards", "proximity_first")
+func _on_body_exited(body: Node2D) -> void:
+    if not body.is_in_group("player"):
+        return
+    _player_in_range = false
+    _ambient_pending = false
 
-func _on_body_exited(body: Node) -> void:
-	if not body.is_in_group("player"):
-		return
-	_player_in_range = false
+func _on_dialogue_ended() -> void:
+    if _player_in_range:
+        _schedule_ambient()
+
+## Schedules the next ambient line after ambient_interval seconds.
+## Only one schedule runs at a time; extra calls while one is pending are ignored.
+func _schedule_ambient() -> void:
+    if _ambient_pending:
+        return
+    _ambient_pending = true
+    await get_tree().create_timer(ambient_interval).timeout
+    if not _ambient_pending or not _player_in_range or DialogueManager.is_open:
+        _ambient_pending = false
+        return
+    _ambient_pending = false
+    _fire_ambient()
 
 func interact() -> void:
-	on_player_talk()
+    on_player_talk()
 
 func on_player_died() -> void:
-	GameState.increment("deaths")
-	var deaths: int = GameState.get_count("deaths")
-	if deaths == 1:
-		DialogueManager.start_conversation("door_guards", "death_first")
-	elif deaths == 50:
-		DialogueManager.start_conversation("door_guards", "death_milestone_50")
-	elif deaths == 25:
-		DialogueManager.start_conversation("door_guards", "death_milestone_25")
-	elif deaths == 10:
-		DialogueManager.start_conversation("door_guards", "death_milestone_10")
-	else:
-		DialogueManager.start_conversation("door_guards", "death_repeat", {"death_count": str(deaths)})
+    GameState.increment("deaths")
+    var deaths: int = GameState.get_count("deaths")
+    if deaths == 1:
+        DialogueManager.start_conversation("door_guards", "death_first")
+    elif deaths == 50:
+        DialogueManager.start_conversation("door_guards", "death_milestone_50")
+    elif deaths == 25:
+        DialogueManager.start_conversation("door_guards", "death_milestone_25")
+    elif deaths == 10:
+        DialogueManager.start_conversation("door_guards", "death_milestone_10")
+    else:
+        DialogueManager.start_conversation("door_guards", "death_repeat", {"death_count": str(deaths)})
 
 func on_player_failed_attempt() -> void:
-	GameState.increment("fails")
-	var fails: int = GameState.get_count("fails")
-	if fails % AMBIENT_EVERY_N_FAILS == 0:
-		var pool: Array[String] = ["ambient_struggle", "ambient_struggle_grim"]
-		var pick: String = pool[randi() % pool.size()]
-		DialogueManager.start_conversation("door_guards", pick)
+    GameState.increment("fails")
+    var fails: int = GameState.get_count("fails")
+    if fails % AMBIENT_EVERY_N_FAILS == 0:
+        var pool: Array[String] = ["ambient_struggle", "ambient_struggle_grim"]
+        var pick: String = pool[randi() % pool.size()]
+        DialogueManager.start_conversation("door_guards", pick)
 
 func on_player_talk() -> void:
-	DialogueManager.start_conversation("door_guards", "player_talks")
+    DialogueManager.start_conversation("door_guards", "player_talks")
 
 func on_player_wins() -> void:
-	DialogueManager.start_conversation("door_guards", "player_wins")
+    DialogueManager.start_conversation("door_guards", "player_wins")
 
 func _fire_ambient() -> void:
-	var pool: Array[String] = ["ambient_idle_greene", "ambient_idle_b", "ambient_idle_c"]
-	var pick: String = pool[randi() % pool.size()]
-	DialogueManager.start_conversation("door_guards", pick)
-
-func _on_dialogue_trigger(trigger: Dictionary) -> void:
-	match trigger.get("type", ""):
-		"ambient":
-			pass
-		"emote":
-			pass
-
-func _build_script() -> Dictionary:
-	return {
-		"nodes": {
-
-			"proximity_first": {
-				"id": "proximity_first",
-				"speaker": "Mr. Greene",
-				"line": "Oh. Another one.",
-				"next": "proximity_first_b",
-			},
-			"proximity_first_b": {
-				"id": "proximity_first_b",
-				"speaker": "Mr. Greene",
-				"line": "They always look so confident walking up. Heh.",
-				"next": "END",
-			},
-
-			"proximity_repeat": {
-				"id": "proximity_repeat",
-				"speaker": "Mr. Greene",
-				"line": [
-					"Back again. Lovely.",
-					"Oh, you're still trying. Good for you.",
-					"We didn't forget you. Unfortunately.",
-					"I told my colleague you'd be back. He owes me lunch.",
-					"Pfft. Yep. Still here. Still you.",
-				],
-				"next": "END",
-			},
-
-			"ambient_idle_greene": {
-				"id": "ambient_idle_greene",
-				"speaker": "Mr. Greene",
-				"line": [
-					"*clears throat*",
-					"...",
-					"Still here.",
-					"Take your time. Really.",
-					"No rush. We've got all day. All week, actually.",
-					"I've seen worse. Well. No I haven't.",
-					"My feet hurt. Just so you know.",
-				],
-				"next": "END",
-			},
-			"ambient_idle_b": {
-				"id": "ambient_idle_b",
-				"speaker": "Mr. Greene",
-				"line": [
-					"You know, most people give up by now.",
-					"The door's not going to open itself.",
-					"I admire the persistence. I don't respect it, but I admire it.",
-					"My shift ends never, in case you were wondering.",
-					"Fascinating. Truly.",
-				],
-				"next": "END",
-			},
-			"ambient_idle_c": {
-				"id": "ambient_idle_c",
-				"speaker": "Mr. Greene",
-				"line": [
-					"Hmm.",
-					"Yep.",
-					"...Heh.",
-					"I've started bringing a book. It's a good book.",
-					"You're doing great. That was a lie.",
-				],
-				"next": "END",
-			},
-
-			"death_first": {
-				"id": "death_first",
-				"speaker": "Mr. Greene",
-				"line": "Oh. That was rough. Don't worry — that was just a warmup.",
-				"next": "death_first_b",
-			},
-			"death_first_b": {
-				"id": "death_first_b",
-				"speaker": "Mr. Greene",
-				"line": "I see everything, by the way. I have nothing else to do.",
-				"next": "END",
-			},
-
-			"death_repeat": {
-				"id": "death_repeat",
-				"speaker": "Mr. Greene",
-				"line": [
-					"Again! You're getting WORSE.",
-					"Ooooh, so close. Not really, but we say that.",
-					"That one looked painful. Emotionally, I mean.",
-					"At this rate we'll be here forever. We ARE here forever. This rules.",
-					"I've been keeping count. You want to know the number?",
-				],
-				"next": "death_repeat_b",
-			},
-			"death_repeat_b": {
-				"id": "death_repeat_b",
-				"speaker": "Mr. Greene",
-				"line": [
-					"Death count: {death_count}. Just so you have a number to reflect on.",
-					"Curious. You keep doing the same thing expecting different results.",
-					"Each attempt is progress. You're learning what doesn't work.",
-					"I have started to feel something watching you. I believe it is pity.",
-					"Do you have a plan, or is this purely improvisational?",
-				],
-				"next": "END",
-			},
-
-			"death_milestone_10": {
-				"id": "death_milestone_10",
-				"condition": {"counter": "deaths", "gte": 10},
-				"speaker": "Mr. Greene",
-				"line": "Ten times. TEN. I mentally made a little cake for this moment.",
-				"next": "death_milestone_10_b",
-				"else": "END",
-			},
-			"death_milestone_10_b": {
-				"id": "death_milestone_10_b",
-				"speaker": "Mr. Greene",
-				"line": "I considered saying something encouraging. I decided against it.",
-				"next": "END",
-			},
-
-			"death_milestone_25": {
-				"id": "death_milestone_25",
-				"condition": {"counter": "deaths", "gte": 25},
-				"speaker": "Mr. Greene",
-				"line": "Twenty-five. I want you to know I have started to respect this. Slightly.",
-				"next": "END",
-				"else": "END",
-			},
-
-			"death_milestone_50": {
-				"id": "death_milestone_50",
-				"condition": {"counter": "deaths", "gte": 50},
-				"speaker": "Mr. Greene",
-				"line": "Fifty deaths. I have been standing here watching you for longer than some entire careers.",
-				"next": "death_milestone_50_b",
-				"else": "END",
-			},
-			"death_milestone_50_b": {
-				"id": "death_milestone_50_b",
-				"speaker": "Mr. Greene",
-				"line": "...I'm not even laughing anymore. I'm in awe. Okay no I'm still laughing. Heheheh.",
-				"next": "END",
-			},
-
-			"player_talks": {
-				"id": "player_talks",
-				"speaker": "Mr. Greene",
-				"line": "You want help. You're asking ME for help.",
-				"next": "player_talks_choices",
-			},
-			"player_talks_choices": {
-				"id": "player_talks_choices",
-				"speaker": "Mr. Greene",
-				"line": "I could offer... advice. Of a kind.",
-				"choices": [
-					{"text": "Yes please, any tips?",       "next": "hint_bad_a"},
-					{"text": "What's behind the door?",     "next": "hint_door"},
-					{"text": "Never mind.",                 "next": "hint_refuse"},
-				],
-			},
-
-			"hint_bad_a": {
-				"id": "hint_bad_a",
-				"speaker": "Mr. Greene",
-				"line": "Go faster. Much faster. Commitment is the key. Do not hesitate.",
-				"next": "hint_bad_a_b",
-			},
-			"hint_bad_a_b": {
-				"id": "hint_bad_a_b",
-				"speaker": "Mr. Greene",
-				"line": "Speed. That's the thing. Trust me.",
-				"next": "END",
-			},
-
-			"hint_door": {
-				"id": "hint_door",
-				"speaker": "Mr. Greene",
-				"line": "Something wonderful.",
-				"next": "hint_door_b",
-			},
-			"hint_door_b": {
-				"id": "hint_door_b",
-				"speaker": "Mr. Greene",
-				"line": "You'll find out. Theoretically.",
-				"next": "END",
-			},
-
-			"hint_refuse": {
-				"id": "hint_refuse",
-				"speaker": "Mr. Greene",
-				"line": "Sure you don't. Good luck.",
-				"next": "END",
-			},
-
-			"ambient_struggle": {
-				"id": "ambient_struggle",
-				"speaker": "Mr. Greene",
-				"line": [
-					"Oooh — no. No no. Aaand no.",
-					"So close. Again.",
-					"That gap was RIGHT THERE.",
-					"Almost! Heh, no it wasn't.",
-					"One day. Maybe. Heheheh.",
-				],
-				"next": "END",
-			},
-			"ambient_struggle_grim": {
-				"id": "ambient_struggle_grim",
-				"speaker": "Mr. Greene",
-				"line": [
-					"The obstacle does not change. Consider why you keep changing your approach.",
-					"Hmm.",
-					"Persistent.",
-					"I have begun to wonder if you enjoy this.",
-					"Watching this has given me a new appreciation for stillness.",
-				],
-				"next": "END",
-			},
-
-			"player_wins": {
-				"id": "player_wins",
-				"speaker": "Mr. Greene",
-				"line": "Wait — what? WHAT.",
-				"next": "player_wins_b",
-			},
-			"player_wins_b": {
-				"id": "player_wins_b",
-				"speaker": "Mr. Greene",
-				"line": "...Hm.",
-				"next": "player_wins_c",
-			},
-			"player_wins_c": {
-				"id": "player_wins_c",
-				"speaker": "Mr. Greene",
-				"line": "I feel something I cannot name. I believe it is... respect. Go. Before it passes.",
-				"trigger": {"type": "emote", "animation": "greene_nod"},
-				"next": "END",
-			},
-		}
-	}
+    if _ambient_lines.is_empty():
+        return
+    var line: String = _ambient_lines[randi() % _ambient_lines.size()]
+    DialogueManager.start_conversation("door_guards", "ambient_idle", {"ambient_line": line})

@@ -108,5 +108,5 @@ func _closer(candidate: Node2D) -> bool:
 	if _current_interactable == null:
 		return true
 	var current_node: Node2D = _current_interactable as Node2D
-	return global_position.distance_to(candidate.global_position) \
-		 < global_position.distance_to(current_node.global_position)
+	return (global_position.distance_to(candidate.global_position)
+		< global_position.distance_to(current_node.global_position))

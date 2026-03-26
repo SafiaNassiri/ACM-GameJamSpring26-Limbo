@@ -1,7 +1,7 @@
 extends PanelContainer
 
-@onready var speaker_label: Label          = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/SpeakerLabel
-@onready var line_label: RichTextLabel     = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/LineLabel
+@onready var speaker_label: Label             = $MarginContainer/VBoxContainer/SpeakerLabel
+@onready var line_label: RichTextLabel        = $MarginContainer/VBoxContainer/LineLabel
 @onready var choices_container: VBoxContainer = $MarginContainer/VBoxContainer/ChoicesContainer
 
 # Typewriter
@@ -40,7 +40,7 @@ func _process(delta: float) -> void:
 	if _visible_chars >= _full_text.length():
 		_finish_typewriter()
 
-func _on_line_ready(speaker: String, line: String) -> void:
+func _on_line_ready(speaker: String, line: String, _portrait: String) -> void:
 	show()
 	choices_container.visible = false
 	for child: Node in choices_container.get_children():
@@ -76,7 +76,8 @@ func _show_choices(choices: Array) -> void:
 	_waiting_for_advance = false
 	choices_container.visible = true
 	for i: int in choices.size():
-		var choice: Dictionary = choices[i]
+		@warning_ignore("unsafe_cast")
+		var choice: Dictionary = choices[i] as Dictionary
 		var btn: Button = Button.new()
 		btn.text = choice.get("text", "...")
 		btn.alignment = HORIZONTAL_ALIGNMENT_LEFT
@@ -85,6 +86,7 @@ func _show_choices(choices: Array) -> void:
 		btn.pressed.connect(func() -> void: _on_choice_pressed(idx))
 		choices_container.add_child(btn)
 	if choices_container.get_child_count() > 0:
+		@warning_ignore("unsafe_cast")
 		(choices_container.get_child(0) as Button).grab_focus()
 
 func _on_choice_pressed(index: int) -> void:
