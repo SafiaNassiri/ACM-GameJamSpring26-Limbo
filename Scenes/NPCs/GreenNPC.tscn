@@ -59,9 +59,10 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fyhya"]
-size = Vector2(30, 20)
+size = Vector2(313, 171)
 
-[node name="GreenNpc" type="Node2D" unique_id=194137999]
+[node name="GreenNpc" type="Area2D" unique_id=1053319268 groups=["interactable"]]
+script = ExtResource("2_dmjug")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1233833531]
 sprite_frames = SubResource("SpriteFrames_efhr0")
@@ -69,9 +70,6 @@ animation = &"run_down"
 autoplay = "idle_down"
 frame_progress = 0.102772474
 
-[node name="Area2D" type="Area2D" parent="." unique_id=1547894127]
-script = ExtResource("2_dmjug")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=222554228]
-position = Vector2(1, 6)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=222554228]
+position = Vector2(113.5, 62.5)
 shape = SubResource("RectangleShape2D_fyhya")

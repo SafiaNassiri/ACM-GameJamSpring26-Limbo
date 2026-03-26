@@ -7,6 +7,8 @@
 [ext_resource type="Script" uid="uid://dxi0i0hsgcqwn" path="res://Scripts/Camera/RoomCamera.gd" id="6_rmcam"]
 [ext_resource type="PackedScene" uid="uid://cee5ygumbqsrd" path="res://Prefabs/Props/rock.tscn" id="6_tpkgp"]
 [ext_resource type="PackedScene" uid="uid://bb57v3itd50gl" path="res://Prefabs/Props/rock_marker.tscn" id="7_irfg1"]
+[ext_resource type="PackedScene" uid="uid://de3slqbovk247" path="res://Scenes/NPCs/GreenNPC.tscn" id="8_irfg1"]
+[ext_resource type="PackedScene" uid="uid://ipiiknjhln4q" path="res://Scenes/UI/DialogueBox.tscn" id="9_5sf7f"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tpkgp"]
 texture = ExtResource("1_nk5xi")
@@ -2018,8 +2020,34 @@ script = ExtResource("6_rmcam")
 [node name="Rock Marker" parent="." unique_id=60857030 instance=ExtResource("7_irfg1")]
 position = Vector2(221, 86)
 
-[node name="Player" parent="." unique_id=525574470 instance=ExtResource("1_s0gyx")]
+[node name="Player" parent="." unique_id=525574470 groups=["player"] instance=ExtResource("1_s0gyx")]
 position = Vector2(160, 88)
+
+[node name="InteractionHandler" parent="Player" index="3" unique_id=1701482429]
+prompt_node_path = NodePath("../../UI/HUD/InteractPrompt")
 
 [node name="Rock" parent="." unique_id=647139204 instance=ExtResource("6_tpkgp")]
 position = Vector2(93, 126)
+
+[node name="UI" type="Node2D" parent="." unique_id=1433726090]
+
+[node name="DialogueBox" parent="UI" unique_id=103464714 instance=ExtResource("9_5sf7f")]
+
+[node name="HUD" type="CanvasLayer" parent="UI" unique_id=853284529]
+
+[node name="InteractPrompt" type="Label" parent="UI/HUD" unique_id=510146492]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -70.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = 28.0
+grow_horizontal = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GreenNpc" parent="." unique_id=194137999 instance=ExtResource("8_irfg1")]
+position = Vector2(46, 26)
+
+[editable path="Player"]

@@ -1,27 +1,60 @@
-# Node setup:
-#   DoorGuardArea (Area2D or Area3D)
-#   ├── CollisionShape2D   ← proximity detection zone
-#   └── DoorGuard.gd       ← this script
+extends Area2D
 
-extends Node
+## How often (seconds) Mr. Greene tosses out an unprompted comment.
+@export var ambient_interval: float = 8.0
+## Randomness added to ambient interval so it doesn't feel robotic.
+@export var ambient_jitter: float = 4.0
+## Prompt shown when player is in range.
+var prompt_text: String = "Talk to Mr. Greene"
 
-# How many failed attempts before ambient taunts trigger
 const AMBIENT_EVERY_N_FAILS: int = 3
+
+var _player_in_range: bool = false
+var _ambient_timer: float = 0.0
+var _next_ambient_time: float = 0.0
 
 func _ready() -> void:
 	DialogueManager.register_script("door_guards", _build_script())
 	DialogueManager.dialogue_trigger.connect(_on_dialogue_trigger)
 
-func on_player_enter_proximity() -> void:
+	body_entered.connect(_on_body_entered)
+	body_exited.connect(_on_body_exited)
+
+	_reset_ambient_timer()
+
+func _process(delta: float) -> void:
+	if not _player_in_range or DialogueManager.is_open:
+		return
+	_ambient_timer += delta
+	if _ambient_timer >= _next_ambient_time:
+		_ambient_timer = 0.0
+		_reset_ambient_timer()
+		_fire_ambient()
+
+func _reset_ambient_timer() -> void:
+	_next_ambient_time = ambient_interval + randf() * ambient_jitter
+
+func _on_body_entered(body: Node) -> void:
+	if not body.is_in_group("player"):
+		return
+	_player_in_range = true
+	_ambient_timer = 0.0
 	if GameState.has_seen("proximity_first"):
 		DialogueManager.start_conversation("door_guards", "proximity_repeat")
 	else:
 		DialogueManager.start_conversation("door_guards", "proximity_first")
 
+func _on_body_exited(body: Node) -> void:
+	if not body.is_in_group("player"):
+		return
+	_player_in_range = false
+
+func interact() -> void:
+	on_player_talk()
+
 func on_player_died() -> void:
 	GameState.increment("deaths")
 	var deaths: int = GameState.get_count("deaths")
-
 	if deaths == 1:
 		DialogueManager.start_conversation("door_guards", "death_first")
 	elif deaths == 50:
@@ -47,110 +80,136 @@ func on_player_talk() -> void:
 func on_player_wins() -> void:
 	DialogueManager.start_conversation("door_guards", "player_wins")
 
+func _fire_ambient() -> void:
+	var pool: Array[String] = ["ambient_idle_greene", "ambient_idle_b", "ambient_idle_c"]
+	var pick: String = pool[randi() % pool.size()]
+	DialogueManager.start_conversation("door_guards", pick)
+
 func _on_dialogue_trigger(trigger: Dictionary) -> void:
 	match trigger.get("type", ""):
 		"ambient":
-			# AudioManager.play(trigger.get("sound", ""))
 			pass
 		"emote":
-			# $AnimationPlayer.play(trigger.get("animation", ""))
 			pass
 
 func _build_script() -> Dictionary:
 	return {
 		"nodes": {
 
-			#  PROXIMITY 
 			"proximity_first": {
 				"id": "proximity_first",
-				"speaker": "Grim",
+				"speaker": "Mr. Greene",
 				"line": "Oh. Another one.",
 				"next": "proximity_first_b",
 			},
 			"proximity_first_b": {
 				"id": "proximity_first_b",
-				"speaker": "Snort",
-				"line": "Heheheh. Yeah they always look SO confident walking up.",
-				"next": "proximity_first_c",
-			},
-			"proximity_first_c": {
-				"id": "proximity_first_c",
-				"speaker": "Grim",
-				"line": "Take your time. The door isn't going anywhere. Unfortunately, neither are you.",
+				"speaker": "Mr. Greene",
+				"line": "They always look so confident walking up. Heh.",
 				"next": "END",
 			},
 
 			"proximity_repeat": {
 				"id": "proximity_repeat",
-				"speaker": "Snort",
+				"speaker": "Mr. Greene",
 				"line": [
-					"Back again! I love this part of the job.",
-					"Oh don't worry, we didn't forget you.",
-					"Pfft — yep, still here. Still you.",
-					"I keep a tally. Wanna know the number?",
-					"I told Grim you'd be back. He owes me lunch.",
+					"Back again. Lovely.",
+					"Oh, you're still trying. Good for you.",
+					"We didn't forget you. Unfortunately.",
+					"I told my colleague you'd be back. He owes me lunch.",
+					"Pfft. Yep. Still here. Still you.",
 				],
 				"next": "END",
 			},
 
-			#  DEATH — FIRST 
+			"ambient_idle_greene": {
+				"id": "ambient_idle_greene",
+				"speaker": "Mr. Greene",
+				"line": [
+					"*clears throat*",
+					"...",
+					"Still here.",
+					"Take your time. Really.",
+					"No rush. We've got all day. All week, actually.",
+					"I've seen worse. Well. No I haven't.",
+					"My feet hurt. Just so you know.",
+				],
+				"next": "END",
+			},
+			"ambient_idle_b": {
+				"id": "ambient_idle_b",
+				"speaker": "Mr. Greene",
+				"line": [
+					"You know, most people give up by now.",
+					"The door's not going to open itself.",
+					"I admire the persistence. I don't respect it, but I admire it.",
+					"My shift ends never, in case you were wondering.",
+					"Fascinating. Truly.",
+				],
+				"next": "END",
+			},
+			"ambient_idle_c": {
+				"id": "ambient_idle_c",
+				"speaker": "Mr. Greene",
+				"line": [
+					"Hmm.",
+					"Yep.",
+					"...Heh.",
+					"I've started bringing a book. It's a good book.",
+					"You're doing great. That was a lie.",
+				],
+				"next": "END",
+			},
+
 			"death_first": {
 				"id": "death_first",
-				"speaker": "Snort",
-				"line": "HAHAHA. Oh — oh that was — did you SEE that, Grim?",
+				"speaker": "Mr. Greene",
+				"line": "Oh. That was rough. Don't worry — that was just a warmup.",
 				"next": "death_first_b",
 			},
 			"death_first_b": {
 				"id": "death_first_b",
-				"speaker": "Grim",
-				"line": "I see everything. I have nothing else to do.",
-				"next": "death_first_c",
-			},
-			"death_first_c": {
-				"id": "death_first_c",
-				"speaker": "Snort",
-				"line": "Don't worry, that was just a warmup. Heh. Heheheh.",
+				"speaker": "Mr. Greene",
+				"line": "I see everything, by the way. I have nothing else to do.",
 				"next": "END",
 			},
 
-			#  DEATH — REPEAT 
 			"death_repeat": {
 				"id": "death_repeat",
-				"speaker": "Snort",
+				"speaker": "Mr. Greene",
 				"line": [
-					"Again! Heheh! You're getting WORSE.",
-					"Ooooh, SO close. Not really, but we say that.",
-					"I've been keeping count. You wanna know the number?",
-					"At this rate we'll be here forever. Actually, we ARE here forever. This rules.",
-					"That one looked painful. Emotionally, I mean. Physically too I suppose.",
+					"Again! You're getting WORSE.",
+					"Ooooh, so close. Not really, but we say that.",
+					"That one looked painful. Emotionally, I mean.",
+					"At this rate we'll be here forever. We ARE here forever. This rules.",
+					"I've been keeping count. You want to know the number?",
 				],
-				"next": "death_repeat_grim",
+				"next": "death_repeat_b",
 			},
-			"death_repeat_grim": {
-				"id": "death_repeat_grim",
-				"speaker": "Grim",
+			"death_repeat_b": {
+				"id": "death_repeat_b",
+				"speaker": "Mr. Greene",
 				"line": [
 					"Death count: {death_count}. Just so you have a number to reflect on.",
 					"Curious. You keep doing the same thing expecting different results.",
-					"Each attempt is technically progress. You're learning what doesn't work.",
+					"Each attempt is progress. You're learning what doesn't work.",
 					"I have started to feel something watching you. I believe it is pity.",
 					"Do you have a plan, or is this purely improvisational?",
 				],
 				"next": "END",
 			},
 
-			#  MILESTONES 
 			"death_milestone_10": {
 				"id": "death_milestone_10",
 				"condition": {"counter": "deaths", "gte": 10},
-				"speaker": "Snort",
-				"line": "TEN TIMES. We hit TEN. I made a little cake. In my head. For this moment.",
+				"speaker": "Mr. Greene",
+				"line": "Ten times. TEN. I mentally made a little cake for this moment.",
 				"next": "death_milestone_10_b",
 				"else": "END",
 			},
 			"death_milestone_10_b": {
 				"id": "death_milestone_10_b",
-				"speaker": "Grim",
+				"speaker": "Mr. Greene",
 				"line": "I considered saying something encouraging. I decided against it.",
 				"next": "END",
 			},
@@ -158,173 +217,119 @@ func _build_script() -> Dictionary:
 			"death_milestone_25": {
 				"id": "death_milestone_25",
 				"condition": {"counter": "deaths", "gte": 25},
-				"speaker": "Grim",
-				"line": "Twenty-five. I want you to know I have started to respect this. Slightly. Don't let it go to your head.",
-				"next": "death_milestone_25_b",
-				"else": "END",
-			},
-			"death_milestone_25_b": {
-				"id": "death_milestone_25_b",
-				"speaker": "Snort",
-				"line": "...okay yeah, twenty-five IS kind of impressive. Still funny though. HEHEH.",
+				"speaker": "Mr. Greene",
+				"line": "Twenty-five. I want you to know I have started to respect this. Slightly.",
 				"next": "END",
+				"else": "END",
 			},
 
 			"death_milestone_50": {
 				"id": "death_milestone_50",
 				"condition": {"counter": "deaths", "gte": 50},
-				"speaker": "Grim",
-				"line": "Fifty deaths. I have been standing here watching you for longer than some entire careers. I have no words.",
+				"speaker": "Mr. Greene",
+				"line": "Fifty deaths. I have been standing here watching you for longer than some entire careers.",
 				"next": "death_milestone_50_b",
 				"else": "END",
 			},
 			"death_milestone_50_b": {
 				"id": "death_milestone_50_b",
-				"speaker": "Snort",
-				"line": "...I'm not even laughing anymore. I'm just — I'm in awe.",
-				"next": "death_milestone_50_c",
-			},
-			"death_milestone_50_c": {
-				"id": "death_milestone_50_c",
-				"speaker": "Snort",
-				"line": "Okay no I'm still laughing. HEHEHEH.",
+				"speaker": "Mr. Greene",
+				"line": "...I'm not even laughing anymore. I'm in awe. Okay no I'm still laughing. Heheheh.",
 				"next": "END",
 			},
 
-			#  PLAYER TALKS 
 			"player_talks": {
 				"id": "player_talks",
-				"speaker": "Grim",
-				"line": "You want help.",
-				"next": "player_talks_b",
-			},
-			"player_talks_b": {
-				"id": "player_talks_b",
-				"speaker": "Snort",
-				"line": "Pfff — they WANT HELP, Grim. They're asking US.",
+				"speaker": "Mr. Greene",
+				"line": "You want help. You're asking ME for help.",
 				"next": "player_talks_choices",
 			},
 			"player_talks_choices": {
 				"id": "player_talks_choices",
-				"speaker": "Grim",
-				"line": "We could offer... advice. Of a kind.",
+				"speaker": "Mr. Greene",
+				"line": "I could offer... advice. Of a kind.",
 				"choices": [
-					{"text": "Yes, please. Any tips?",              "next": "hint_bad_a"},
-					{"text": "What's behind the door?",             "next": "hint_door"},
-					{"text": "Never mind, I don't need help.",       "next": "hint_refuse"},
+					{"text": "Yes please, any tips?",       "next": "hint_bad_a"},
+					{"text": "What's behind the door?",     "next": "hint_door"},
+					{"text": "Never mind.",                 "next": "hint_refuse"},
 				],
 			},
 
 			"hint_bad_a": {
 				"id": "hint_bad_a",
-				"speaker": "Grim",
-				"line": "The key is commitment. Go faster. Much faster. Do not hesitate.",
+				"speaker": "Mr. Greene",
+				"line": "Go faster. Much faster. Commitment is the key. Do not hesitate.",
 				"next": "hint_bad_a_b",
 			},
 			"hint_bad_a_b": {
 				"id": "hint_bad_a_b",
-				"speaker": "Snort",
-				"line": "Yep. Speed. That's definitely the thing. Go with speed.",
-				"next": "hint_bad_a_c",
-			},
-			"hint_bad_a_c": {
-				"id": "hint_bad_a_c",
-				"speaker": "Grim",
-				"line": "Trust us.",
-				"trigger": {"type": "ambient", "sound": "dry_cough"},
+				"speaker": "Mr. Greene",
+				"line": "Speed. That's the thing. Trust me.",
 				"next": "END",
 			},
 
 			"hint_door": {
 				"id": "hint_door",
-				"speaker": "Grim",
+				"speaker": "Mr. Greene",
 				"line": "Something wonderful.",
 				"next": "hint_door_b",
 			},
 			"hint_door_b": {
 				"id": "hint_door_b",
-				"speaker": "Snort",
-				"line": "...I mean, sure. 'Wonderful.' Let's say that.",
-				"next": "hint_door_c",
-			},
-			"hint_door_c": {
-				"id": "hint_door_c",
-				"speaker": "Grim",
+				"speaker": "Mr. Greene",
 				"line": "You'll find out. Theoretically.",
 				"next": "END",
 			},
 
 			"hint_refuse": {
 				"id": "hint_refuse",
-				"speaker": "Snort",
-				"line": "Sure. Sure you don't.",
-				"next": "hint_refuse_b",
-			},
-			"hint_refuse_b": {
-				"id": "hint_refuse_b",
-				"speaker": "Grim",
-				"line": "Good luck.",
-				"next": "hint_refuse_c",
-			},
-			"hint_refuse_c": {
-				"id": "hint_refuse_c",
-				"speaker": "Snort",
-				"line": "Heheheh.",
+				"speaker": "Mr. Greene",
+				"line": "Sure you don't. Good luck.",
 				"next": "END",
 			},
 
-			#  AMBIENT STRUGGLE 
 			"ambient_struggle": {
 				"id": "ambient_struggle",
-				"speaker": "Snort",
+				"speaker": "Mr. Greene",
 				"line": [
 					"Oooh — no. No no. Aaand no.",
-					"So close. Again. Heh.",
+					"So close. Again.",
 					"That gap was RIGHT THERE.",
-					"I physically flinched. Grim did you flinch?",
-					"Almost! That was almost it! Heheh, no it wasn't.",
+					"Almost! Heh, no it wasn't.",
 					"One day. Maybe. Heheheh.",
 				],
 				"next": "END",
 			},
 			"ambient_struggle_grim": {
 				"id": "ambient_struggle_grim",
-				"speaker": "Grim",
+				"speaker": "Mr. Greene",
 				"line": [
-					"I did not flinch.",
-					"Watching this has given me a new appreciation for stillness.",
 					"The obstacle does not change. Consider why you keep changing your approach.",
 					"Hmm.",
 					"Persistent.",
 					"I have begun to wonder if you enjoy this.",
+					"Watching this has given me a new appreciation for stillness.",
 				],
 				"next": "END",
 			},
 
-			#  PLAYER WINS 
 			"player_wins": {
 				"id": "player_wins",
-				"speaker": "Snort",
-				"line": "Wait — what? WHAT? They — Grim. GRIM.",
+				"speaker": "Mr. Greene",
+				"line": "Wait — what? WHAT.",
 				"next": "player_wins_b",
 			},
 			"player_wins_b": {
 				"id": "player_wins_b",
-				"speaker": "Grim",
+				"speaker": "Mr. Greene",
 				"line": "...Hm.",
 				"next": "player_wins_c",
 			},
 			"player_wins_c": {
 				"id": "player_wins_c",
-				"speaker": "Snort",
-				"line": "That's IT? That's all you've got? They ACTUALLY DID IT and all you say is 'hm'??",
-				"next": "player_wins_d",
-			},
-			"player_wins_d": {
-				"id": "player_wins_d",
-				"speaker": "Grim",
+				"speaker": "Mr. Greene",
 				"line": "I feel something I cannot name. I believe it is... respect. Go. Before it passes.",
-				"trigger": {"type": "emote", "animation": "grim_nod"},
+				"trigger": {"type": "emote", "animation": "greene_nod"},
 				"next": "END",
 			},
 		}

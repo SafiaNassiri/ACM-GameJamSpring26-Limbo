@@ -44,6 +44,11 @@ window/size/window_height_override=704
 window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
 
+[global_group]
+
+player=""
+interactable=""
+
 [input]
 
 player_up={
