@@ -21,6 +21,11 @@ boot_splash/image="uid://to8de2c3hjia"
 config/icon="res://icon.svg"
 boot_splash/minimum_display_time=3000
 
+[autoload]
+
+DialogueManager="*uid://bo7fr3jc5cgis"
+GameState="*uid://bcgpp0vrw7ugn"
+
 [debug]
 
 gdscript/warnings/untyped_declaration=2

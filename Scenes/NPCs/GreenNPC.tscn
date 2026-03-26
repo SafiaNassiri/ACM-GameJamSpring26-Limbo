@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://de3slqbovk247"]
 
 [ext_resource type="Texture2D" uid="uid://cryfjfh450i0i" path="res://Assets/Sprites/Ninja Adventure - Asset Pack/Actor/Characters/CamouflageGreen/SpriteSheet.png" id="1_fyhya"]
+[ext_resource type="Script" uid="uid://dugkjqva6qrk5" path="res://Scripts/NPCs/DoorGuard.gd" id="2_dmjug"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dmjug"]
 atlas = ExtResource("1_fyhya")
@@ -58,7 +59,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fyhya"]
-size = Vector2(13.5, 5)
+size = Vector2(30, 20)
 
 [node name="GreenNpc" type="Node2D" unique_id=194137999]
 
@@ -69,7 +70,8 @@ autoplay = "idle_down"
 frame_progress = 0.102772474
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1547894127]
+script = ExtResource("2_dmjug")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=222554228]
-position = Vector2(0.25, 5.5)
+position = Vector2(1, 6)
 shape = SubResource("RectangleShape2D_fyhya")
