@@ -6,13 +6,13 @@ var tasks: Array = [
 	["Press  J  to Jump",           "player_jump",    "Registering jump..."],
 	["Press  SHIFT  to Sprint",     "player_sprint",  "Enabling sprint..."],
 	["Press  Q  to Block",          "player_block",   "Equipping shield..."],
-	["Press  E  to talk",       "player_talk",		  "Conmencing speach..."],
+	["Press  E  to talk",           "player_talk",    "Conmencing speach..."],
 	["Press  F  to Roll",           "player_roll",    "Enabling roll..."],
 ]
 
 var current_task: int     = 0
 var task_processing: bool = false
-var active: bool          = false  # input is ignored until start() is called
+var active: bool          = false  
 
 @onready var task_labels: Array[Label] = [
 	$Panel/MarginContainer/VBoxContainer/Task1,
