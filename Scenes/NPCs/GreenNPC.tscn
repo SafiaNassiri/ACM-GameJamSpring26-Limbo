@@ -1,3 +1,75 @@
 [gd_scene format=3 uid="uid://de3slqbovk247"]
 
+[ext_resource type="Texture2D" uid="uid://cryfjfh450i0i" path="res://Assets/Sprites/Ninja Adventure - Asset Pack/Actor/Characters/CamouflageGreen/SpriteSheet.png" id="1_fyhya"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dmjug"]
+atlas = ExtResource("1_fyhya")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bhoi5"]
+atlas = ExtResource("1_fyhya")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lokos"]
+atlas = ExtResource("1_fyhya")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cjyhb"]
+atlas = ExtResource("1_fyhya")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uiyxb"]
+atlas = ExtResource("1_fyhya")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_syrlf"]
+atlas = ExtResource("1_fyhya")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_efhr0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dmjug")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bhoi5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lokos")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cjyhb")
+}],
+"loop": true,
+"name": &"idle_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uiyxb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_syrlf")
+}],
+"loop": true,
+"name": &"run_down",
+"speed": 7.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fyhya"]
+size = Vector2(13.5, 5)
+
 [node name="GreenNpc" type="Node2D" unique_id=194137999]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1233833531]
+sprite_frames = SubResource("SpriteFrames_efhr0")
+animation = &"run_down"
+autoplay = "idle_down"
+frame_progress = 0.102772474
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1547894127]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=222554228]
+position = Vector2(0.25, 5.5)
+shape = SubResource("RectangleShape2D_fyhya")

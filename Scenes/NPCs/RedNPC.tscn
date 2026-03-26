@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://cqjubc83t728m"]
+
+[ext_resource type="Texture2D" uid="uid://b7frps2ev0p3l" path="res://Assets/Sprites/Ninja Adventure - Asset Pack/Actor/Characters/CamouflageRed/SpriteSheet.png" id="1_1uobw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_83pba"]
+atlas = ExtResource("1_1uobw")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8i4fp"]
+atlas = ExtResource("1_1uobw")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jx4f4"]
+atlas = ExtResource("1_1uobw")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sv57o"]
+atlas = ExtResource("1_1uobw")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4tvkd"]
+atlas = ExtResource("1_1uobw")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cy2yl"]
+atlas = ExtResource("1_1uobw")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_egwaw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_83pba")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8i4fp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jx4f4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sv57o")
+}],
+"loop": true,
+"name": &"idle_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4tvkd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cy2yl")
+}],
+"loop": true,
+"name": &"run_down",
+"speed": 7.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_unysv"]
+size = Vector2(13.5, 5)
+
+[node name="RedNpc" type="Node2D" unique_id=2029227536]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1097979636]
+sprite_frames = SubResource("SpriteFrames_egwaw")
+animation = &"idle_down"
+autoplay = "idle_down"
+frame_progress = 0.42860013
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1643889216]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1278315017]
+position = Vector2(0.25, 5.5)
+shape = SubResource("RectangleShape2D_unysv")
