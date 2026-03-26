@@ -38,4 +38,6 @@ build/
 
 #Claude
 CLAUDE.md
+.claude
 run_tests.sh
+*claude
