@@ -22,7 +22,7 @@ var _door: TileMapLayer = null
 func _ready() -> void:
 	_rock = get_parent().get_node("Rock") as Node2D
 	_player = get_parent().get_node("Player")
-	_door = get_parent().get_node("TitleLayers/Door_01") as TileMapLayer
+	_door = get_parent().get_node("==TitleLayers==/Door_01") as TileMapLayer
 
 func _physics_process(_delta: float) -> void:
 	if not _active or _busy or _rock == null:
