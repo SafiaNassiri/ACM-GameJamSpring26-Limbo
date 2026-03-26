@@ -1,10 +1,13 @@
 [gd_scene format=3 uid="uid://bb57v3itd50gl"]
 
 [ext_resource type="Texture2D" uid="uid://cxakw1ayglo1g" path="res://Assets/Sprites/Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetLogic.png" id="1_rws1m"]
+[ext_resource type="Script" path="res://Scripts/Props/RockPuzzle.gd" id="2_puzzle"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e8yly"]
+size = Vector2(14, 16)
 
 [node name="Rock Marker" type="Node2D" unique_id=60857030]
+script = ExtResource("2_puzzle")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=320688870]
 texture = ExtResource("1_rws1m")
@@ -15,3 +18,5 @@ region_rect = Rect2(0, 80, 16, 16)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1463516467]
 shape = SubResource("RectangleShape2D_e8yly")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=2000000001]
