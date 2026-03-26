@@ -16,8 +16,10 @@ enum Direction { DOWN, UP, RIGHT, LEFT }
 
 var state: State = State.IDLE
 var facing: Direction = Direction.DOWN
+var _grabbed_rock: RigidBody2D = null
+var _rock_original_parent: Node = null
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
     if body == null:
         return
 
@@ -34,7 +36,41 @@ func _physics_process(delta: float) -> void:
         state = State.IDLE
 
     body.move_and_slide()
+    _handle_rock_grab()
     _apply_animation()
+
+func _handle_rock_grab() -> void:
+    if not Input.is_action_pressed("player_interact"):
+        if _grabbed_rock != null:
+            _release_rock()
+        return
+
+    # Already holding a rock — nothing more to do.
+    if _grabbed_rock != null:
+        return
+
+    # Latch onto the first RigidBody2D we touch this frame.
+    for i: int in body.get_slide_collision_count():
+        var collision: KinematicCollision2D = body.get_slide_collision(i)
+        var collider: Object = collision.get_collider()
+        if collider is RigidBody2D:
+            _latch_rock(collider as RigidBody2D)
+            break
+
+func _latch_rock(rock: RigidBody2D) -> void:
+    _rock_original_parent = rock.get_parent()
+    _grabbed_rock = rock
+    rock.freeze = true
+    body.add_collision_exception_with(rock)
+    rock.reparent(body, true)  # keep_global_transform = true
+
+func _release_rock() -> void:
+    _grabbed_rock.reparent(_rock_original_parent, true)
+    body.remove_collision_exception_with(_grabbed_rock)
+    _grabbed_rock.freeze = false
+    _grabbed_rock.linear_velocity = Vector2.ZERO
+    _grabbed_rock = null
+    _rock_original_parent = null
 
 func _update_facing(dir: Vector2) -> void:
     # Prefer horizontal facing when moving diagonally.
