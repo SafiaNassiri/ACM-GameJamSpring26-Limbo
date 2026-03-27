@@ -41,6 +41,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	if event.is_action_pressed("player_interact"):
 		_try_interact()
+	if event.is_action_pressed("ui_cancel"):
+		get_tree().change_scene_to_file("res://Scenes/UI/pause.tscn")
 
 func _on_body_entered(body: Node2D) -> void:
 	if not body.is_in_group("interactable"):

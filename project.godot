@@ -15,7 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="Limbo"
-run/main_scene="uid://djtxxd2s1u3g2"
+run/main_scene="uid://db7vh5lhy4x7r"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 boot_splash/image="uid://to8de2c3hjia"
 config/icon="res://icon.svg"

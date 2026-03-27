@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://db7vh5lhy4x7r"]
+
+[ext_resource type="Script" uid="uid://pdvr7dhrtn77" path="res://Scripts/UI/main_menu.gd" id="1_5wsvm"]
+
+[node name="Main Menu" type="Node2D" unique_id=272010535]
+script = ExtResource("1_5wsvm")
+
+[node name="Button_manager" type="Control" parent="." unique_id=231529852]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Play" type="Button" parent="Button_manager" unique_id=389393847]
+layout_mode = 0
+offset_left = 122.0
+offset_top = 30.0
+offset_right = 192.0
+offset_bottom = 70.0
+theme_override_font_sizes/font_size = 12
+text = "Play Game"
+
+[node name="Settings" type="Button" parent="Button_manager" unique_id=1048591056]
+layout_mode = 0
+offset_left = 122.0
+offset_top = 79.0
+offset_right = 192.0
+offset_bottom = 119.0
+theme_override_font_sizes/font_size = 12
+text = "Settings"
+
+[node name="Quit" type="Button" parent="Button_manager" unique_id=679311846]
+layout_mode = 0
+offset_left = 123.0
+offset_top = 127.0
+offset_right = 193.0
+offset_bottom = 167.0
+theme_override_font_sizes/font_size = 12
+text = "Quit"
+
+[node name="Title" type="Label" parent="." unique_id=102713649]
+offset_right = 320.0
+offset_bottom = 23.0
+text = "Limbo"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="Button_manager/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Button_manager/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Button_manager/Quit" to="." method="_on_quit_pressed"]

@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://1xq4emg0ck0"]
+
+[ext_resource type="Script" uid="uid://coegpxatpvybk" path="res://Scripts/UI/options.gd" id="1_sncl2"]
+
+[node name="Options" type="Node2D" unique_id=1625055871]
+script = ExtResource("1_sncl2")
+
+[node name="Control" type="Control" parent="." unique_id=93757508]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Back To Main Menu" type="Button" parent="Control" unique_id=363328682]
+layout_mode = 0
+offset_right = 43.0
+offset_bottom = 33.0
+text = "<-"
+
+[node name="Title" type="Label" parent="." unique_id=105746241]
+offset_right = 319.0
+offset_bottom = 23.0
+text = "Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="Control/Back To Main Menu" to="." method="_on_back_to_main_menu_pressed"]

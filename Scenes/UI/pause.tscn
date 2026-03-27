@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://dhcpoy85kpgst"]
+
+[ext_resource type="Script" uid="uid://btcioayobi1vv" path="res://Scripts/UI/pause.gd" id="1_goa2i"]
+
+[node name="Pause" type="Node2D" unique_id=1176554475]
+script = ExtResource("1_goa2i")
+
+[node name="Label" type="Label" parent="." unique_id=44958238]
+offset_right = 321.0
+offset_bottom = 175.0
+theme_override_font_sizes/font_size = 12
+text = "You Have Pressed the Pause.
+You have to restart now.
+I hate to break it to you buddy, there is no pause. 
+You have to start over.  :') Womp Womp
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Troll" type="Button" parent="." unique_id=48337172]
+offset_left = 132.0
+offset_top = 129.0
+offset_right = 205.0
+offset_bottom = 160.0
+text = "Click Me"
+
+[node name="Back To Menu" type="Button" parent="." unique_id=1538541029]
+offset_left = 176.0
+offset_top = 96.0
+offset_right = 184.0
+offset_bottom = 104.0
+
+[connection signal="pressed" from="Back To Menu" to="." method="_on_back_to_menu_pressed"]
