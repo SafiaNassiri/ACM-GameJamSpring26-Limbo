@@ -44,7 +44,7 @@ git clone https://github.com/SafiaNassiri/ACM-GameJamSpring26-Limbo.git
 The full design documentation can be found here:
 
 **Game Design Document:**  
-[Limbo — GDD] (https://docs.google.com/document/d/1B1OkL54kuCSKMvNLnGaY3PXOqg9lsm8Z3Sr2Op7jubQ/edit?tab=t.0#heading=h.z6ne0og04bp5)
+[Limbo — GDD](https://docs.google.com/document/d/1B1OkL54kuCSKMvNLnGaY3PXOqg9lsm8Z3Sr2Op7jubQ/edit?tab=t.0#heading=h.z6ne0og04bp5)
 
 All contributors should review the GDD before implementing major features.
 Make sure to update the GDD as you work.
