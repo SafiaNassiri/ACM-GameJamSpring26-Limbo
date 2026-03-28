@@ -20,8 +20,13 @@
 [ext_resource type="Texture2D" uid="uid://88l22vyh2jt1" path="res://Assets/Sprites/Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetTowers.png" id="11_rrvv5"]
 [ext_resource type="Texture2D" uid="uid://d07nwibdm2616" path="res://Assets/Sprites/Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetWater.png" id="12_g8fqy"]
 [ext_resource type="Script" uid="uid://dm3c67d7ek2i5" path="res://Scripts/Systems/FakeTutorial.gd" id="19_d3pra"]
+[ext_resource type="Script" uid="uid://cvmbslodvhj2t" path="res://Scripts/UI/FakeProgressBar.gd" id="20_2tpv6"]
 [ext_resource type="Script" uid="uid://qblb2k12l0b2" path="res://Scripts/Systems/Room2Trigger.gd" id="21_rrvv5"]
 [ext_resource type="PackedScene" uid="uid://bn2vcooegsjr0" path="res://Prefabs/Props/extended_wall.tscn" id="22_g8fqy"]
+[ext_resource type="Script" uid="uid://ikcr1yvutfea" path="res://Scripts/Systems/Room3Trigger.gd" id="24_wnekd"]
+[ext_resource type="Script" uid="uid://wnma5yyc8xsy" path="res://Scripts/Systems/Room3Manager.gd" id="25_56s34"]
+[ext_resource type="Texture2D" uid="uid://dob3jydw1gnsp" path="res://Assets/Sprites/Ninja Adventure - Asset Pack/Items/Object/Hourglass.png" id="26_v8chn"]
+[ext_resource type="Script" uid="uid://qc8820omywsc" path="res://Scenes/Levels/LyingButton.gd" id="26_wnekd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tpkgp"]
 texture = ExtResource("1_nk5xi")
@@ -5348,7 +5353,13 @@ sources/7 = SubResource("TileSetAtlasSource_2tpv6")
 sources/8 = SubResource("TileSetAtlasSource_wnekd")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d3pra"]
-size = Vector2(322, 178)
+size = Vector2(317, 174)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3bctx"]
+size = Vector2(317, 172)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2tpv6"]
+size = Vector2(16, 16)
 
 [node name="Main" type="Node2D" unique_id=1789893899]
 script = ExtResource("1_hlgat")
@@ -5475,19 +5486,74 @@ theme_override_font_sizes/font_size = 8
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
 
+[node name="FakeProgressBar" type="CanvasLayer" parent="==UI==" unique_id=406222150]
+script = ExtResource("20_2tpv6")
+
+[node name="Panel" type="Panel" parent="==UI==/FakeProgressBar" unique_id=574016740]
+offset_right = 87.0
+offset_bottom = 40.0
+
+[node name="StatusLabel" type="Label" parent="==UI==/FakeProgressBar/Panel" unique_id=1434318347]
+layout_mode = 0
+offset_right = 87.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 10
+
+[node name="BarContainer" type="HBoxContainer" parent="==UI==/FakeProgressBar/Panel" unique_id=1990433715]
+layout_mode = 0
+offset_top = 24.0
+offset_right = 87.0
+offset_bottom = 40.0
+
+[node name="BarBG" type="PanelContainer" parent="==UI==/FakeProgressBar/Panel/BarContainer" unique_id=326264966]
+layout_mode = 2
+
+[node name="BarFill" type="PanelContainer" parent="==UI==/FakeProgressBar/Panel/BarContainer" unique_id=1753977621]
+layout_mode = 2
+
 [node name="==NPCs==" type="Node2D" parent="." unique_id=1706294265]
 
 [node name="GreenNpc" parent="==NPCs==" unique_id=194137999 instance=ExtResource("8_irfg1")]
 position = Vector2(46, 26)
 
+[node name="ExtendedWall" parent="." unique_id=1436872935 instance=ExtResource("22_g8fqy")]
+position = Vector2(632, 440)
+
 [node name="Room2Trigger" type="Area2D" parent="." unique_id=1214007618]
 script = ExtResource("21_rrvv5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Room2Trigger" unique_id=478163208]
-position = Vector2(159, 263)
+position = Vector2(160.5, 263)
 shape = SubResource("RectangleShape2D_d3pra")
 
-[node name="ExtendedWall" parent="." unique_id=1436872935 instance=ExtResource("22_g8fqy")]
-position = Vector2(632, 440)
+[node name="Room3Trigger" type="Area2D" parent="." unique_id=1488854588]
+script = ExtResource("24_wnekd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Room3Trigger" unique_id=1056019545]
+position = Vector2(161.5, 439)
+shape = SubResource("RectangleShape2D_3bctx")
+
+[node name="Room3Manager" type="Node" parent="." unique_id=1471811187]
+script = ExtResource("25_56s34")
+
+[node name="==Room3Stuff==" type="Node2D" parent="." unique_id=750418098]
+
+[node name="LyingButton" type="Area2D" parent="==Room3Stuff==" unique_id=1899363069]
+script = ExtResource("26_wnekd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="==Room3Stuff==/LyingButton" unique_id=1781824147]
+position = Vector2(22, 372)
+shape = SubResource("RectangleShape2D_2tpv6")
+
+[node name="Sprite2D" type="Sprite2D" parent="==Room3Stuff==/LyingButton" unique_id=1706209983]
+position = Vector2(22, 372)
+texture = ExtResource("26_v8chn")
+region_rect = Rect2(608.09216, 675.7948, 64.3501, 65.47894)
+
+[node name="CheckpointFlag" type="Sprite2D" parent="==Room3Stuff==" unique_id=911052616]
+position = Vector2(291, 503)
+texture = ExtResource("11_rrvv5")
+region_enabled = true
+region_rect = Rect2(290.46597, 64.61757, 26.944183, 31.292343)
 
 [editable path="Player"]
