@@ -3,8 +3,8 @@ extends CanvasLayer
 signal bar_complete
 
 @onready var status_label: Label         = $Panel/StatusLabel
-@onready var bar_fill: PanelContainer    = $Panel/BarContainer/BarFill
-@onready var bar_bg: PanelContainer      = $Panel/BarContainer/BarBG
+@onready var bar_fill: PanelContainer    = $Panel/BarBG/BarFill
+@onready var bar_bg: PanelContainer      = $Panel/BarBG
 
 var _progress: float   = 0.0   # 0.0 – 1.0
 var _running: bool     = false
@@ -15,6 +15,8 @@ const FILL_SPEED: float     = 0.04   # progress per second
 
 func _ready() -> void:
 	visible = false
+	# Wait for layout so bar_bg.size.x is valid
+	await get_tree().process_frame
 	_set_fill(0.0)
 
 func start_bar(label_text: String) -> void:
@@ -55,3 +57,9 @@ func _process(delta: float) -> void:
 func _set_fill(t: float) -> void:
 	var total_width: float = bar_bg.size.x
 	bar_fill.custom_minimum_size.x = total_width * t
+
+func hide_bar() -> void:
+	visible = false
+	_running = false
+	_progress = 0.0
+	_set_fill(0.0)
