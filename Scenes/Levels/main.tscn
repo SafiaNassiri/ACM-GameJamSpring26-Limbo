@@ -6352,6 +6352,7 @@ script = ExtResource("6_rmcam")
 position = Vector2(221, 86)
 
 [node name="Player" parent="." unique_id=525574470 groups=["player"] instance=ExtResource("1_s0gyx")]
+z_index = 10
 position = Vector2(160, 88)
 
 [node name="InteractionHandler" parent="Player" index="3" unique_id=1701482429]
