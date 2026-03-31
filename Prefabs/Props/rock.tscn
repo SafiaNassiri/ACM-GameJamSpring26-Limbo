@@ -7,9 +7,9 @@ size = Vector2(14, 16)
 
 [node name="Rock" type="RigidBody2D" unique_id=647139204]
 gravity_scale = 0.0
+lock_rotation = true
 linear_damp = 12.0
 angular_damp = 12.0
-lock_rotation = true
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=16898632]
 texture = ExtResource("1_deq2w")

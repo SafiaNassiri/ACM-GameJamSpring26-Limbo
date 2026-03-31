@@ -23,6 +23,14 @@ func _physics_process(_delta: float) -> void:
 	if body == null:
 		return
 
+	# Freeze movement while dialogue is active.
+	if DialogueManager.is_open:
+		body.velocity = Vector2.ZERO
+		body.move_and_slide()
+		state = State.IDLE
+		_apply_animation()
+		return
+
 	var input_dir: Vector2 = Input.get_vector(
 		"player_left", "player_right", "player_up", "player_down"
 	)
