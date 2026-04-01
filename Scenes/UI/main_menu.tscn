@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://pdvr7dhrtn77" path="res://Scripts/UI/main_menu.gd" id="1_5wsvm"]
 [ext_resource type="Texture2D" uid="uid://cdrvq4q5pd8n6" path="res://Assets/Sprites/jungle_tile_set/tf_jungle_tileset.png" id="2_i2xx2"]
+[ext_resource type="FontFile" uid="uid://bskgxhwpgcggv" path="res://Assets/Fonts/Code 8x8.ttf" id="3_o14dv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o14dv"]
 texture = ExtResource("2_i2xx2")
@@ -581,72 +582,9 @@ texture = ExtResource("2_i2xx2")
 [sub_resource type="TileSet" id="TileSet_mrfpk"]
 sources/0 = SubResource("TileSetAtlasSource_u7lva")
 
-[sub_resource type="FontFile" id="FontFile_i2xx2"]
-cache/0/variation_coordinates = {}
-cache/0/face_index = 0
-cache/0/embolden = 0.0
-cache/0/transform = Transform2D(1, 0, 0, 1, 0, 0)
-cache/0/spacing_top = 0
-cache/0/spacing_bottom = 0
-cache/0/spacing_space = 0
-cache/0/spacing_glyph = 0
-cache/0/baseline_offset = 0.0
-cache/0/16/0/ascent = 0.0
-cache/0/16/0/descent = 0.0
-cache/0/16/0/underline_position = 0.0
-cache/0/16/0/underline_thickness = 0.0
-cache/0/16/0/scale = 1.0
-cache/0/12/0/ascent = 0.0
-cache/0/12/0/descent = 0.0
-cache/0/12/0/underline_position = 0.0
-cache/0/12/0/underline_thickness = 0.0
-cache/0/12/0/scale = 1.0
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o14dv"]
 
-[sub_resource type="FontFile" id="FontFile_u7lva"]
-cache/0/variation_coordinates = {}
-cache/0/face_index = 0
-cache/0/embolden = 0.0
-cache/0/transform = Transform2D(1, 0, 0, 1, 0, 0)
-cache/0/spacing_top = 0
-cache/0/spacing_bottom = 0
-cache/0/spacing_space = 0
-cache/0/spacing_glyph = 0
-cache/0/baseline_offset = 0.0
-cache/0/16/0/ascent = 0.0
-cache/0/16/0/descent = 0.0
-cache/0/16/0/underline_position = 0.0
-cache/0/16/0/underline_thickness = 0.0
-cache/0/16/0/scale = 1.0
-cache/0/12/0/ascent = 0.0
-cache/0/12/0/descent = 0.0
-cache/0/12/0/underline_position = 0.0
-cache/0/12/0/underline_thickness = 0.0
-cache/0/12/0/scale = 1.0
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mrfpk"]
-
-[sub_resource type="FontFile" id="FontFile_4pqbp"]
-cache/0/variation_coordinates = {}
-cache/0/face_index = 0
-cache/0/embolden = 0.0
-cache/0/transform = Transform2D(1, 0, 0, 1, 0, 0)
-cache/0/spacing_top = 0
-cache/0/spacing_bottom = 0
-cache/0/spacing_space = 0
-cache/0/spacing_glyph = 0
-cache/0/baseline_offset = 0.0
-cache/0/16/0/ascent = 0.0
-cache/0/16/0/descent = 0.0
-cache/0/16/0/underline_position = 0.0
-cache/0/16/0/underline_thickness = 0.0
-cache/0/16/0/scale = 1.0
-cache/0/12/0/ascent = 0.0
-cache/0/12/0/descent = 0.0
-cache/0/12/0/underline_position = 0.0
-cache/0/12/0/underline_thickness = 0.0
-cache/0/12/0/scale = 1.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gih0s"]
 
@@ -670,37 +608,37 @@ offset_bottom = 40.0
 
 [node name="Play" type="Button" parent="Button_manager" unique_id=389393847]
 layout_mode = 0
-offset_left = 123.0
+offset_left = 117.0
 offset_top = 34.0
-offset_right = 198.0
+offset_right = 205.0
 offset_bottom = 76.0
 theme_override_colors/font_color = Color(0.86463505, 0.9310444, 0, 1)
-theme_override_fonts/font = SubResource("FontFile_i2xx2")
-theme_override_font_sizes/font_size = 12
+theme_override_fonts/font = ExtResource("3_o14dv")
+theme_override_font_sizes/font_size = 8
 theme_override_styles/normal = SubResource("StyleBoxEmpty_o14dv")
 text = "Play Game"
 
 [node name="Settings" type="Button" parent="Button_manager" unique_id=1048591056]
 layout_mode = 0
-offset_left = 121.0
+offset_left = 115.0
 offset_top = 77.0
-offset_right = 198.0
+offset_right = 203.0
 offset_bottom = 118.0
 theme_override_colors/font_color = Color(0.804772, 0.95098716, 0, 1)
-theme_override_fonts/font = SubResource("FontFile_u7lva")
-theme_override_font_sizes/font_size = 12
+theme_override_fonts/font = ExtResource("3_o14dv")
+theme_override_font_sizes/font_size = 8
 theme_override_styles/normal = SubResource("StyleBoxEmpty_mrfpk")
 text = "Settings"
 
 [node name="Quit" type="Button" parent="Button_manager" unique_id=679311846]
 layout_mode = 0
-offset_left = 121.0
+offset_left = 115.0
 offset_top = 118.0
-offset_right = 199.0
+offset_right = 203.0
 offset_bottom = 159.0
 theme_override_colors/font_color = Color(0.68469155, 0.9843996, 0, 1)
-theme_override_fonts/font = SubResource("FontFile_4pqbp")
-theme_override_font_sizes/font_size = 12
+theme_override_fonts/font = ExtResource("3_o14dv")
+theme_override_font_sizes/font_size = 8
 theme_override_styles/normal = SubResource("StyleBoxEmpty_gih0s")
 text = "Quit"
 

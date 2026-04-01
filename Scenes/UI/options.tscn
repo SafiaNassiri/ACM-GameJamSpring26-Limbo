@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://coegpxatpvybk" path="res://Scripts/UI/options.gd" id="1_sncl2"]
 [ext_resource type="Texture2D" uid="uid://wmb7afwfsww8" path="res://Assets/Sprites/cloud_tile_set/bg_bluesky.png" id="2_j6lap"]
 [ext_resource type="Texture2D" uid="uid://t682nenpgrrn" path="res://Assets/Sprites/cloud_tile_set/cloud_tileset.png" id="3_35y0k"]
+[ext_resource type="FontFile" uid="uid://bskgxhwpgcggv" path="res://Assets/Fonts/Code 8x8.ttf" id="4_35y0k"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0s3wi"]
 texture = ExtResource("2_j6lap")
@@ -659,22 +660,6 @@ sources/1 = SubResource("TileSetAtlasSource_jme0m")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lb2cc"]
 
-[sub_resource type="FontFile" id="FontFile_1prx2"]
-cache/0/variation_coordinates = {}
-cache/0/face_index = 0
-cache/0/embolden = 0.0
-cache/0/transform = Transform2D(1, 0, 0, 1, 0, 0)
-cache/0/spacing_top = 0
-cache/0/spacing_bottom = 0
-cache/0/spacing_space = 0
-cache/0/spacing_glyph = 0
-cache/0/baseline_offset = 0.0
-cache/0/16/0/ascent = 0.0
-cache/0/16/0/descent = 0.0
-cache/0/16/0/underline_position = 0.0
-cache/0/16/0/underline_thickness = 0.0
-cache/0/16/0/scale = 1.0
-
 [node name="Options" type="Node2D" unique_id=1625055871]
 script = ExtResource("1_sncl2")
 
@@ -702,7 +687,8 @@ offset_top = 12.0
 offset_right = 320.0
 offset_bottom = 35.0
 theme_override_colors/font_color = Color(0.09411765, 0, 1, 1)
-theme_override_fonts/font = SubResource("FontFile_1prx2")
+theme_override_fonts/font = ExtResource("4_35y0k")
+theme_override_font_sizes/font_size = 8
 text = "Settings"
 horizontal_alignment = 1
 vertical_alignment = 1
