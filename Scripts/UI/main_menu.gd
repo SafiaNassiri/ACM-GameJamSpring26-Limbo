@@ -12,7 +12,8 @@ func _process(delta: float) -> void:
 
 
 func _on_play_pressed() -> void:
-	get_tree().change_scene_to_file("res://Scenes/Levels/main.tscn")
+	get_tree().change_scene_to_file("res://Scenes/UI/background.tscn")
+	#get_tree().change_scene_to_file("res://Scenes/Levels/main.tscn")
 
 func _on_settings_pressed() -> void:
 	get_tree().change_scene_to_file("res://Scenes/UI/options.tscn")
