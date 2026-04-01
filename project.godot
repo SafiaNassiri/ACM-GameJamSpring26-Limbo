@@ -25,6 +25,7 @@ boot_splash/minimum_display_time=3000
 
 DialogueManager="*uid://bo7fr3jc5cgis"
 GameState="*uid://bcgpp0vrw7ugn"
+AudioManager="*res://Scripts/Systems/AudioManager.gd"
 
 [debug]
 
@@ -38,6 +39,7 @@ gdscript/warnings/unsafe_cast=2
 
 window/size/viewport_width=320
 window/size/viewport_height=176
+window/size/mode=3
 window/size/initial_position_type=4
 window/size/window_width_override=1280
 window/size/window_height_override=704

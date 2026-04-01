@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ipiiknjhln4q"]
 
 [ext_resource type="Script" uid="uid://4uo53ecag4jr" path="res://Scripts/UI/Dialoguebox.gd" id="1_38wjl"]
+[ext_resource type="FontFile" uid="uid://bskgxhwpgcggv" path="res://Assets/Fonts/Code 8x8.ttf" id="2_pwatt"]
 
 [node name="DialogueBox" type="CanvasLayer" unique_id=103464714]
 
@@ -29,16 +30,18 @@ layout_mode = 2
 
 [node name="SpeakerLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=2061097030]
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
+theme_override_fonts/font = ExtResource("2_pwatt")
+theme_override_font_sizes/font_size = 8
 
 [node name="LineLabel" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=734877866]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
-theme_override_font_sizes/normal_font_size = 10
-theme_override_font_sizes/bold_font_size = 10
-theme_override_font_sizes/bold_italics_font_size = 10
-theme_override_font_sizes/italics_font_size = 10
-theme_override_font_sizes/mono_font_size = 10
+theme_override_fonts/normal_font = ExtResource("2_pwatt")
+theme_override_font_sizes/normal_font_size = 8
+theme_override_font_sizes/bold_font_size = 8
+theme_override_font_sizes/bold_italics_font_size = 8
+theme_override_font_sizes/italics_font_size = 8
+theme_override_font_sizes/mono_font_size = 8
 bbcode_enabled = true
 
 [node name="ChoicesContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=312847561]

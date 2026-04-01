@@ -1,5 +1,8 @@
 extends Node
 
+## Assign the special Room 3 music track here once the audio file is ready.
+@export var room3_music: AudioStream
+
 var _done: bool = false
 
 @onready var progress_bar: Node    = $"../../==UI==/FakeProgressBar"
@@ -31,7 +34,10 @@ func _on_button_stepped() -> void:
 func _on_bar_complete() -> void:
 	_done = true
 	(real_door as TileMapLayer).enabled = false
+	progress_bar.call("hide_bar")
 
-func hide_progress_bar() -> void:
-	if not _done:
-		progress_bar.call("hide_bar")
+func enter_room3() -> void:
+	AudioManager.enter_room3_music(room3_music)
+
+func exit_room3() -> void:
+	AudioManager.exit_room3_music()
