@@ -1,33 +1,71 @@
 [gd_scene format=3 uid="uid://dhcpoy85kpgst"]
 
 [ext_resource type="Script" uid="uid://btcioayobi1vv" path="res://Scripts/UI/pause.gd" id="1_goa2i"]
+[ext_resource type="FontFile" uid="uid://bskgxhwpgcggv" path="res://Assets/Fonts/Code 8x8.ttf" id="3_3vu23"]
 
 [node name="Pause" type="Node2D" unique_id=1176554475]
 script = ExtResource("1_goa2i")
 
 [node name="Label" type="Label" parent="." unique_id=44958238]
-offset_right = 321.0
-offset_bottom = 175.0
+offset_left = 2.0
+offset_top = 54.0
+offset_right = 323.0
+offset_bottom = 108.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_3vu23")
 theme_override_font_sizes/font_size = 12
-text = "You Have Pressed the Pause.
+text = "You have pressed ESC"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=559247087]
+offset_left = 7.0
+offset_top = 3.0
+offset_right = 322.0
+offset_bottom = 67.0
+theme_override_fonts/normal_font = ExtResource("3_3vu23")
+theme_override_font_sizes/normal_font_size = 8
+text = "
 You have to restart now.
 I hate to break it to you buddy, there is no pause. 
 You have to start over.  :') Womp Womp
 "
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="Troll" type="Button" parent="." unique_id=48337172]
-offset_left = 132.0
-offset_top = 129.0
-offset_right = 205.0
-offset_bottom = 160.0
-text = "Click Me"
+offset_left = 31.0
+offset_top = 101.0
+offset_right = 272.0
+offset_bottom = 132.0
+theme_override_fonts/font = ExtResource("3_3vu23")
+theme_override_font_sizes/font_size = 8
+text = "Click \"Me\" to restart the game"
+
+[node name="Label2" type="Label" parent="." unique_id=621958173]
+offset_left = 294.0
+offset_top = 3.0
+offset_right = 318.0
+offset_bottom = 15.0
+theme_override_fonts/font = ExtResource("3_3vu23")
+theme_override_font_sizes/font_size = 8
+text = "\"ME\""
 
 [node name="Back To Menu" type="Button" parent="." unique_id=1538541029]
-offset_left = 176.0
-offset_top = 96.0
-offset_right = 184.0
-offset_bottom = 104.0
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
+offset_left = 298.0
+offset_top = 3.0
+offset_right = 315.0
+offset_bottom = 15.0
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="." unique_id=1890376618]
+offset_left = 49.0
+offset_top = 134.0
+offset_right = 319.0
+offset_bottom = 174.0
+theme_override_fonts/normal_font = ExtResource("3_3vu23")
+theme_override_font_sizes/normal_font_size = 8
+text = "Here are the controls:
+[W,A,S,D] - Move
+[SPACE] - Interact/Do Random Stuff"
 
 [connection signal="pressed" from="Back To Menu" to="." method="_on_back_to_menu_pressed"]
