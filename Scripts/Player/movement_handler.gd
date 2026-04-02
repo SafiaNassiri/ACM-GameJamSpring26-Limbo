@@ -1,10 +1,14 @@
 extends Node
+class_name MovementHandler
 
 # Top-down 8-directional movement handler.
 # Animations use directional suffixes: _down, _up, _right.
 # Left movement mirrors the _right animations via sprite.flip_h.
 
 @export var speed: float = 90.0
+
+## When true, all directional input is inverted.
+var controls_reversed: bool = false
 
 @onready var body: CharacterBody2D = get_parent() as CharacterBody2D
 @onready var sprite: AnimatedSprite2D = body.get_node_or_null("AnimatedSprite2D") as AnimatedSprite2D
@@ -34,6 +38,8 @@ func _physics_process(_delta: float) -> void:
 	var input_dir: Vector2 = Input.get_vector(
 		"player_left", "player_right", "player_up", "player_down"
 	)
+	if controls_reversed:
+		input_dir = -input_dir
 
 	if input_dir != Vector2.ZERO:
 		body.velocity = input_dir.normalized() * speed
