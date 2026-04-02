@@ -8050,6 +8050,8 @@ texture = ExtResource("1_pskv8")
 [sub_resource type="TileSet" id="TileSet_ok5o0"]
 sources/0 = SubResource("TileSetAtlasSource_ycc34")
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ok5o0"]
+
 [node name="Background" type="Node2D" unique_id=1126352257]
 script = ExtResource("1_ycc34")
 
@@ -8066,4 +8068,15 @@ theme_override_colors/default_color = Color(1, 1, 0, 1)
 theme_override_fonts/normal_font = ExtResource("3_ok5o0")
 text = "once upon a time in a galaxy far far away..."
 
+[node name="Button" type="Button" parent="." unique_id=604634428]
+offset_left = 111.0
+offset_top = 137.0
+offset_right = 204.0
+offset_bottom = 164.0
+theme_override_colors/font_color = Color(0.91091406, 0.9139442, 0, 1)
+theme_override_fonts/font = ExtResource("3_ok5o0")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ok5o0")
+text = "continue"
+
 [connection signal="gui_input" from="RichTextLabel" to="." method="_on_rich_text_label_gui_input"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
