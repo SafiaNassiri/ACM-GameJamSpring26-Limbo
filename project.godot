@@ -18,7 +18,9 @@ config/name="Limbo"
 run/main_scene="uid://db7vh5lhy4x7r"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 boot_splash/image="uid://to8de2c3hjia"
-config/icon="res://icon.svg"
+config/icon="uid://f8bc1npbc84l"
+config/macos_native_icon="res://LimboIcon.icns"
+config/windows_native_icon="res://LimboIcon.ico"
 boot_splash/minimum_display_time=3000
 
 [autoload]
