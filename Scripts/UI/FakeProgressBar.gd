@@ -18,64 +18,64 @@ const DRAIN_MULTIPLIER: float = 6.0
 const FILL_PER_PRESS: float = 0.04
 
 func _ready() -> void:
-    visible = false
-    await get_tree().process_frame
-    _set_fill(0.0)
+	visible = false
+	await get_tree().process_frame
+	_set_fill(0.0)
 
 func start_bar() -> void:
-    if _active:
-        return
-    _progress = 0.0
-    _active   = true
-    _set_fill(0.0)
-    visible = true
-    status_label.text = "0%"
-    AudioManager.set_bar_active(true)
+	if _active:
+		return
+	_progress = 0.0
+	_active   = true
+	_set_fill(0.0)
+	visible = true
+	status_label.text = "0%"
+	AudioManager.set_bar_active(true)
 
 func _process(delta: float) -> void:
-    if not _active:
-        return
+	if not _active:
+		return
 
-    if Input.is_action_just_pressed("player_interact"):
-        _progress += FILL_PER_PRESS
-        AudioManager.notify_space_press()
+	if Input.is_action_just_pressed("player_interact"):
+		_progress += FILL_PER_PRESS
+		AudioManager.notify_space_press()
 
-    # Check completion before applying drain so 100% is reachable.
-    if _progress >= 1.0:
-        _active   = false
-        _progress = 1.0
-        _set_fill(1.0)
-        status_label.text = "Done."
-        AudioManager.set_bar_active(false)
-        await get_tree().create_timer(0.5).timeout
-        bar_complete.emit()
-        return
+	# Check completion before applying drain so 100% is reachable.
+	if _progress >= 1.0:
+		_active   = false
+		_progress = 1.0
+		_set_fill(1.0)
+		status_label.text = "Done."
+		AudioManager.set_bar_active(false)
+		await get_tree().create_timer(0.5).timeout
+		bar_complete.emit()
+		return
 
-    # Drain escalates linearly with progress — hardest near the end.
-    var drain_rate: float = BASE_DRAIN * (1.0 + (DRAIN_MULTIPLIER - 1.0) * _progress)
-    _progress = max(0.0, _progress - drain_rate * delta)
+	# Drain escalates linearly with progress — hardest near the end.
+	var drain_rate: float = BASE_DRAIN * (1.0 + (DRAIN_MULTIPLIER - 1.0) * _progress)
+	_progress = max(0.0, _progress - drain_rate * delta)
 
-    _set_fill(_progress)
-    _update_label()
+	_set_fill(_progress)
+	_update_label()
 
 func _update_label() -> void:
-    var pct: int = int(_progress * 100)
-    if pct >= 95:
-        status_label.text = "SO CLOSE. %d%%" % pct
-    elif pct >= 70:
-        status_label.text = "Almost... %d%%" % pct
-    elif pct >= 40:
-        status_label.text = "Keep going... %d%%" % pct
-    else:
-        status_label.text = "Press SPACE %d%%" % pct
+	var pct: int = int(_progress * 100)
+	if pct >= 95:
+		status_label.text = "SO CLOSE. %d%%" % pct
+	elif pct >= 70:
+		status_label.text = "Almost... %d%%" % pct
+	elif pct >= 40:
+		status_label.text = "Keep going... %d%%" % pct
+	else:
+		status_label.text = "Press SPACE %d%%" % pct
 
 func _set_fill(t: float) -> void:
-    var total_width: float = bar_bg.size.x
-    bar_fill.custom_minimum_size.x = total_width * t
+	var total_width: float = bar_bg.size.x
+	bar_fill.custom_minimum_size.x = total_width * t
 
 func hide_bar() -> void:
-    visible   = false
-    _active   = false
-    _progress = 0.0
-    _set_fill(0.0)
-    AudioManager.set_bar_active(false)
+	visible   = false
+	_active   = false
+	_progress = 0.0
+	_set_fill(0.0)
+	AudioManager.set_bar_active(false)
