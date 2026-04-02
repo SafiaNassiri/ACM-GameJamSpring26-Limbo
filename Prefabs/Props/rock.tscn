@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cee5ygumbqsrd"]
 
-[ext_resource type="Texture2D" uid="uid://cy887vug8afqk" path="res://Assets/Sprites/Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetHouse.png" id="1_deq2w"]
+[ext_resource type="Texture2D" uid="uid://igb1c4q4fi5t" path="res://Assets/Sprites/HomemadeAssets/assets.png" id="1_deq2w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_deq2w"]
 size = Vector2(14, 16)
@@ -14,7 +14,7 @@ angular_damp = 12.0
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=16898632]
 texture = ExtResource("1_deq2w")
 region_enabled = true
-region_rect = Rect2(33, 353, 14, 15)
+region_rect = Rect2(0, 40, 16, 16)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=496294619]
 shape = SubResource("RectangleShape2D_deq2w")

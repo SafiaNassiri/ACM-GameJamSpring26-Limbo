@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bn2vcooegsjr0"]
 
-[ext_resource type="Texture2D" uid="uid://dcn8wrvgusjou" path="res://Assets/Sprites/Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetFloor.png" id="1_w1erq"]
 [ext_resource type="Script" uid="uid://dvjw1ml22ohu" path="res://Scripts/Props/ExtendedWall.gd" id="2_exwall"]
+[ext_resource type="Texture2D" uid="uid://igb1c4q4fi5t" path="res://Assets/Sprites/HomemadeAssets/assets.png" id="2_j0qf0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j0qf0"]
 size = Vector2(8, 176)
@@ -11,51 +11,51 @@ script = ExtResource("2_exwall")
 
 [node name="Sprite2D_right" type="Sprite2D" parent="." unique_id=1777086607]
 position = Vector2(0, -80)
-texture = ExtResource("1_w1erq")
+texture = ExtResource("2_j0qf0")
 region_enabled = true
-region_rect = Rect2(32, 0, 16, 16)
+region_rect = Rect2(140, 0, 16, 16)
 
 [node name="Sprite2D_right2" type="Sprite2D" parent="." unique_id=1794942102]
 position = Vector2(0, -64)
-texture = ExtResource("1_w1erq")
+texture = ExtResource("2_j0qf0")
 region_enabled = true
-region_rect = Rect2(32, 16, 16, 16)
+region_rect = Rect2(40, 0, 16, 16)
 
 [node name="Sprite2D_right3" type="Sprite2D" parent="." unique_id=766738208]
 position = Vector2(0, -48)
-texture = ExtResource("1_w1erq")
+texture = ExtResource("2_j0qf0")
 region_enabled = true
-region_rect = Rect2(32, 16, 16, 16)
+region_rect = Rect2(40, 0, 16, 16)
 
 [node name="Sprite2D_right4" type="Sprite2D" parent="." unique_id=1866530033]
 position = Vector2(0, -32)
-texture = ExtResource("1_w1erq")
+texture = ExtResource("2_j0qf0")
 region_enabled = true
-region_rect = Rect2(32, 16, 16, 16)
+region_rect = Rect2(40, 0, 16, 16)
 
 [node name="Sprite2D_right8" type="Sprite2D" parent="." unique_id=1862387320]
 position = Vector2(0, 32)
-texture = ExtResource("1_w1erq")
+texture = ExtResource("2_j0qf0")
 region_enabled = true
-region_rect = Rect2(32, 16, 16, 16)
+region_rect = Rect2(40, 0, 16, 16)
 
 [node name="Sprite2D_right9" type="Sprite2D" parent="." unique_id=50057588]
 position = Vector2(0, 48)
-texture = ExtResource("1_w1erq")
+texture = ExtResource("2_j0qf0")
 region_enabled = true
-region_rect = Rect2(32, 16, 16, 16)
+region_rect = Rect2(40, 0, 16, 16)
 
 [node name="Sprite2D_right10" type="Sprite2D" parent="." unique_id=1356681595]
 position = Vector2(0, 64)
-texture = ExtResource("1_w1erq")
+texture = ExtResource("2_j0qf0")
 region_enabled = true
-region_rect = Rect2(32, 16, 16, 16)
+region_rect = Rect2(40, 0, 16, 16)
 
 [node name="Sprite2D_right11" type="Sprite2D" parent="." unique_id=655921078]
 position = Vector2(0, 80)
-texture = ExtResource("1_w1erq")
+texture = ExtResource("2_j0qf0")
 region_enabled = true
-region_rect = Rect2(32, 32, 16, 16)
+region_rect = Rect2(120, 0, 16, 16)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1249829082]
 position = Vector2(4, 0)
