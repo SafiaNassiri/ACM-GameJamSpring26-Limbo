@@ -1,8 +1,5 @@
 extends Node2D
 
-## Drag the background music file here in the Inspector.
-@export var background_music: AudioStream
-
 @onready var bridge: Node      = $"==TitleLayers==/Bridge"
 @onready var water: Node       = $"==TitleLayers==/Water"
 @onready var tutorial_ui: Node = $"==UI==/TutorialUI"
@@ -39,8 +36,6 @@ const APOLOGY_SCRIPT: Dictionary = {
 }
 
 func _ready() -> void:
-	AudioManager.play_music(background_music)
-
 	# Bridge starts hidden
 	(bridge as TileMapLayer).visible = false
 

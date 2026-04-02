@@ -170,3 +170,13 @@ func _process(delta: float) -> void:
 	_music_player.volume_db = move_toward(
 		_music_player.volume_db, bg_target, ROOM3_VOLUME_SLEW * delta
 	)
+
+# Sets master volume from a slider value (0.0 = silent, 1.0 = full).
+func set_master_volume(value: float) -> void:
+	var db: float = linear_to_db(value)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), db)
+	AudioServer.set_bus_mute(AudioServer.get_bus_index("Master"), value == 0.0)
+
+# Returns current master volume as a linear value (0.0–1.0).
+func get_master_volume() -> float:
+	return db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Master")))

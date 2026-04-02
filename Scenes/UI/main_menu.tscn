@@ -2,7 +2,9 @@
 
 [ext_resource type="Script" uid="uid://pdvr7dhrtn77" path="res://Scripts/UI/main_menu.gd" id="1_5wsvm"]
 [ext_resource type="Texture2D" uid="uid://cdrvq4q5pd8n6" path="res://Assets/Sprites/jungle_tile_set/tf_jungle_tileset.png" id="2_i2xx2"]
+[ext_resource type="AudioStream" uid="uid://bop24fp4xb1rp" path="res://Assets/2024-05-23_-_Ride_The_Mellow-vator_-_www.FesliyanStudios.com.wav" id="2_u7lva"]
 [ext_resource type="FontFile" uid="uid://bskgxhwpgcggv" path="res://Assets/Fonts/Code 8x8.ttf" id="3_o14dv"]
+[ext_resource type="Texture2D" uid="uid://batpvs2cn7lw0" path="res://Assets/LimboLogo.png" id="4_mrfpk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o14dv"]
 texture = ExtResource("2_i2xx2")
@@ -590,6 +592,7 @@ sources/0 = SubResource("TileSetAtlasSource_u7lva")
 
 [node name="Main Menu" type="Node2D" unique_id=272010535]
 script = ExtResource("1_5wsvm")
+background_music = ExtResource("2_u7lva")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=248987989]
 texture_filter = 1
@@ -600,19 +603,28 @@ tile_set = SubResource("TileSet_5wsvm")
 tile_map_data = PackedByteArray("AAAAAAkAAAAKAAIAAAABAAUAAAALAAUAAAABAAYAAAALAAYAAAABAAcAAAALAAcAAAABAAgAAAALAAgAAAABAAkAAAALAAIAAAACAAUAAAAMAAUAAAACAAYAAAAMAAYAAAACAAcAAAAMAAcAAAACAAgAAAAMAAgAAAACAAkAAAAMAAkAAAADAAUAAAANAAUAAAADAAYAAAANAAYAAAADAAcAAAANAAcAAAADAAgAAAANAAgAAAADAAkAAAANAAkAAAAEAAYAAAAOAAYAAAAEAAcAAAAOAAcAAAAEAAgAAAAOAAgAAAAAAAYAAAAKAAYAAAAAAAcAAAAKAAcAAAAAAAgAAAAKAAgAAAABAAoAAAAQAAsAAAACAAoAAAARAAsAAAADAAoAAAASAAsAAAABAAMAAAAFAAMAAAAQAAoAAAACAAQAAAASAAoAAAAEAAUAAAARAAUAAAADAAMAAAARAAYAAAADAAQAAAASAAUAAAAEAAMAAAASAAYAAAAEAAQAAAAOAAQAAAAHAAIAAAAEAAMAAAAGAAIAAAAOAAIAAAAIAAMAAAAFAAkAAAABAAYAAAAEAAEAAAAEAAcAAAAFAAEAAAAFAAcAAAA=")
 tile_set = SubResource("TileSet_mrfpk")
 
+[node name="Panel" type="Sprite2D" parent="." unique_id=1332516917]
+position = Vector2(160, 88)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_mrfpk")
+
 [node name="Button_manager" type="Control" parent="." unique_id=231529852]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 320.0
+offset_bottom = 176.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Play" type="Button" parent="Button_manager" unique_id=389393847]
 layout_mode = 0
-offset_left = 117.0
-offset_top = 34.0
-offset_right = 205.0
-offset_bottom = 76.0
-theme_override_colors/font_color = Color(0.86463505, 0.9310444, 0, 1)
+offset_left = 104.0
+offset_top = 83.0
+offset_right = 204.0
+offset_bottom = 103.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_o14dv")
 theme_override_font_sizes/font_size = 8
 theme_override_styles/normal = SubResource("StyleBoxEmpty_o14dv")
@@ -620,11 +632,11 @@ text = "Play Game"
 
 [node name="Settings" type="Button" parent="Button_manager" unique_id=1048591056]
 layout_mode = 0
-offset_left = 115.0
-offset_top = 77.0
-offset_right = 203.0
-offset_bottom = 118.0
-theme_override_colors/font_color = Color(0.804772, 0.95098716, 0, 1)
+offset_left = 104.0
+offset_top = 115.0
+offset_right = 204.0
+offset_bottom = 135.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_o14dv")
 theme_override_font_sizes/font_size = 8
 theme_override_styles/normal = SubResource("StyleBoxEmpty_mrfpk")
@@ -632,26 +644,15 @@ text = "Settings"
 
 [node name="Quit" type="Button" parent="Button_manager" unique_id=679311846]
 layout_mode = 0
-offset_left = 115.0
-offset_top = 118.0
-offset_right = 203.0
-offset_bottom = 159.0
-theme_override_colors/font_color = Color(0.68469155, 0.9843996, 0, 1)
+offset_left = 104.0
+offset_top = 147.0
+offset_right = 204.0
+offset_bottom = 167.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_o14dv")
 theme_override_font_sizes/font_size = 8
 theme_override_styles/normal = SubResource("StyleBoxEmpty_gih0s")
 text = "Quit"
-
-[node name="Title" type="Label" parent="." unique_id=102713649]
-offset_left = 1.0
-offset_top = 8.0
-offset_right = 321.0
-offset_bottom = 31.0
-theme_override_colors/font_color = Color(0.6392157, 0.91764706, 0, 1)
-theme_override_fonts/font = ExtResource("3_o14dv")
-text = "Limbo"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [connection signal="pressed" from="Button_manager/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Button_manager/Settings" to="." method="_on_settings_pressed"]

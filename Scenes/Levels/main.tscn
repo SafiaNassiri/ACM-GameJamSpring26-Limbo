@@ -4,7 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://wh8hg38tcjl2" path="res://Assets/Sprites/Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetDungeon.png" id="1_nk5xi"]
 [ext_resource type="PackedScene" uid="uid://ga7ykd0o7k6s" path="res://Scenes/Player/player.tscn" id="1_s0gyx"]
 [ext_resource type="Texture2D" uid="uid://cxakw1ayglo1g" path="res://Assets/Sprites/Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetLogic.png" id="2_7i1ub"]
-[ext_resource type="AudioStream" uid="uid://bop24fp4xb1rp" path="res://Assets/2024-05-23_-_Ride_The_Mellow-vator_-_www.FesliyanStudios.com.wav" id="2_8i2ar"]
 [ext_resource type="Texture2D" uid="uid://igb1c4q4fi5t" path="res://Assets/Sprites/HomemadeAssets/assets.png" id="3_ay6nb"]
 [ext_resource type="Texture2D" uid="uid://dcn8wrvgusjou" path="res://Assets/Sprites/Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetFloor.png" id="3_w0lsm"]
 [ext_resource type="Texture2D" uid="uid://c1lwwqcymymov" path="res://Assets/Sprites/Cute_Fantasy_Free/Outdoor decoration/Outdoor_Decor_Free.png" id="4_asd15"]
@@ -6583,7 +6582,6 @@ size = Vector2(15, 9)
 
 [node name="Main" type="Node2D" unique_id=1789893899]
 script = ExtResource("1_hlgat")
-background_music = ExtResource("2_8i2ar")
 
 [node name="==TitleLayers==" type="Node2D" parent="." unique_id=1955970447]
 
