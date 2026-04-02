@@ -50,7 +50,9 @@ func _on_body_entered(body: Node2D) -> void:
     if not body.is_in_group("player"):
         return
     _player_in_range = true
-    if GameState.has_seen("proximity_first"):
+    if GameState.get_flag("lava_puzzle_solved"):
+        DialogueManager.start_conversation("door_guards", "greene_revealed")
+    elif GameState.has_seen("proximity_first"):
         DialogueManager.start_conversation("door_guards", "proximity_repeat")
     else:
         DialogueManager.start_conversation("door_guards", "proximity_first")
@@ -83,6 +85,9 @@ func interact() -> void:
 
 func on_player_died() -> void:
     GameState.increment("deaths")
+    if GameState.get_flag("lava_puzzle_solved"):
+        DialogueManager.start_conversation("door_guards", "greene_revealed")
+        return
     var deaths: int = GameState.get_count("deaths")
     if deaths == 1:
         DialogueManager.start_conversation("door_guards", "death_first")
@@ -97,6 +102,9 @@ func on_player_died() -> void:
 
 func on_player_failed_attempt() -> void:
     GameState.increment("fails")
+    if GameState.get_flag("lava_puzzle_solved"):
+        DialogueManager.start_conversation("door_guards", "greene_revealed")
+        return
     var fails: int = GameState.get_count("fails")
     if fails % AMBIENT_EVERY_N_FAILS == 0:
         var pool: Array[String] = ["ambient_struggle", "ambient_struggle_grim"]
@@ -104,12 +112,18 @@ func on_player_failed_attempt() -> void:
         DialogueManager.start_conversation("door_guards", pick)
 
 func on_player_talk() -> void:
+    if GameState.get_flag("lava_puzzle_solved"):
+        DialogueManager.start_conversation("door_guards", "greene_revealed")
+        return
     DialogueManager.start_conversation("door_guards", "player_talks")
 
 func on_player_wins() -> void:
     DialogueManager.start_conversation("door_guards", "player_wins")
 
 func _fire_ambient() -> void:
+    if GameState.get_flag("lava_puzzle_solved"):
+        DialogueManager.start_conversation("door_guards", "greene_revealed")
+        return
     if _ambient_lines.is_empty():
         return
     var line: String = _ambient_lines[randi() % _ambient_lines.size()]

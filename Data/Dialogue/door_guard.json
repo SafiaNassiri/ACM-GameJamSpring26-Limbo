@@ -203,6 +203,13 @@
             "next": "END"
         },
 
+        "greene_revealed": {
+            "id": "greene_revealed",
+            "speaker": "Mr. Greene",
+            "line": "You could have won this whole time if only you pressed: Lightning, Red-X, Egg, Heart, Lightning!",
+            "next": "END"
+        },
+
         "player_wins": {
             "id": "player_wins",
             "speaker": "Mr. Greene",

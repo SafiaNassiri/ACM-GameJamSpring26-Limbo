@@ -9,11 +9,22 @@ signal stepped_on(key_num: int)
 
 @export var key_number: int = 1
 
+var _player_inside: bool = false
+
 func _ready() -> void:
     add_to_group("key_tile")
     body_entered.connect(_on_body_entered)
+    body_exited.connect(_on_body_exited)
 
 func _on_body_entered(body: Node2D) -> void:
     if not body.is_in_group("player"):
         return
+    if _player_inside:
+        return
+    _player_inside = true
     stepped_on.emit(key_number)
+
+func _on_body_exited(body: Node2D) -> void:
+    if not body.is_in_group("player"):
+        return
+    _player_inside = false

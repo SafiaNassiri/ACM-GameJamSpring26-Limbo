@@ -23,6 +23,7 @@ func _on_body_entered(body: Node2D) -> void:
 	_used = true
 	_fix_controls(body)
 	_remove_door()
+	GameState.set_flag("lava_puzzle_solved", true)
 
 func _fix_controls(player: Node2D) -> void:
 	for child: Node in player.get_children():

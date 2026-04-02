@@ -46,6 +46,14 @@ func _on_line_ready(speaker: String, line: String, _portrait: String) -> void:
 	for child: Node in choices_container.get_children():
 		child.queue_free()
 
+	# Turn all Mr. Greene text red once the lava puzzle is solved.
+	if speaker == "Mr. Greene" and GameState.get_flag("lava_puzzle_solved"):
+		speaker_label.add_theme_color_override("font_color", Color.RED)
+		line_label.add_theme_color_override("default_color", Color.RED)
+	else:
+		speaker_label.remove_theme_color_override("font_color")
+		line_label.remove_theme_color_override("default_color")
+
 	speaker_label.text = speaker.to_upper()
 	_start_typewriter(line)
 

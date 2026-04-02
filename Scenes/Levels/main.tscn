@@ -7024,15 +7024,16 @@ shape = SubResource("RectangleShape2D_7k7h7")
 debug_color = Color(0.5340118, 0.41134882, 1, 0.41960785)
 
 [node name="Area2D14" type="Area2D" parent="LavaArea" unique_id=1959743370 groups=["lava"]]
+script = ExtResource("34_myo5v")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LavaArea/Area2D14" unique_id=769854443]
 position = Vector2(488, 136)
 shape = SubResource("RectangleShape2D_gx6dv")
 debug_color = Color(0.5340118, 0.41134882, 1, 0.41960785)
 
-[node name="LastPuzzle" type="Node" parent="LavaArea" unique_id=1925719312]
+[node name="LastPuzzle" type="Node" parent="." unique_id=1925719312]
 script = ExtResource("35_f2lhe")
-door_03 = NodePath("../../==TitleLayers==/Door_03")
+door_03 = NodePath("../==TitleLayers==/Door_03")
 
 [node name="Key1" type="Area2D" parent="." unique_id=1362330001]
 position = Vector2(25, 152)
@@ -7049,25 +7050,26 @@ key_number = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Key2" unique_id=1749215765]
 shape = SubResource("RectangleShape2D_15c3s")
 
-[node name="Key3" type="Area2D" parent="." unique_id=664745254]
-position = Vector2(23, 25)
+[node name="Key3" type="Area2D" parent="." unique_id=1892368855]
+position = Vector2(296, 153)
 script = ExtResource("36_gv65w")
 key_number = 3
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Key3" unique_id=811372650]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Key3" unique_id=1476261407]
 shape = SubResource("RectangleShape2D_15c3s")
 
-[node name="Key4" type="Area2D" parent="." unique_id=1892368855]
-position = Vector2(296, 153)
+[node name="Key4" type="Area2D" parent="." unique_id=664745254]
+position = Vector2(23, 25)
 script = ExtResource("36_gv65w")
 key_number = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Key4" unique_id=1476261407]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Key4" unique_id=811372650]
 shape = SubResource("RectangleShape2D_15c3s")
 
 [node name="FixControl" type="Area2D" parent="." unique_id=1553291062]
 position = Vector2(392, 151)
 script = ExtResource("37_415y4")
+door_02 = NodePath("../==TitleLayers==/Door_02")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FixControl" unique_id=2138257833]
 shape = SubResource("RectangleShape2D_15c3s")
