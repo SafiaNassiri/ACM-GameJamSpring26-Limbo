@@ -8104,6 +8104,7 @@ theme_override_fonts/font = ExtResource("3_ag10f")
 theme_override_font_sizes/font_size = 10
 theme_override_styles/normal = SubResource("StyleBoxEmpty_ok5o0")
 text = "continue"
+flat = true
 
 [connection signal="gui_input" from="Control/RichTextLabel" to="." method="_on_rich_text_label_gui_input"]
 [connection signal="pressed" from="Control/Button" to="." method="_on_button_pressed"]

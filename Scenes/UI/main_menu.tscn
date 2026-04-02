@@ -629,6 +629,7 @@ theme_override_fonts/font = ExtResource("3_o14dv")
 theme_override_font_sizes/font_size = 8
 theme_override_styles/normal = SubResource("StyleBoxEmpty_o14dv")
 text = "Play Game"
+flat = true
 
 [node name="Settings" type="Button" parent="Button_manager" unique_id=1048591056]
 layout_mode = 0
@@ -641,6 +642,7 @@ theme_override_fonts/font = ExtResource("3_o14dv")
 theme_override_font_sizes/font_size = 8
 theme_override_styles/normal = SubResource("StyleBoxEmpty_mrfpk")
 text = "Settings"
+flat = true
 
 [node name="Quit" type="Button" parent="Button_manager" unique_id=679311846]
 layout_mode = 0
@@ -653,6 +655,7 @@ theme_override_fonts/font = ExtResource("3_o14dv")
 theme_override_font_sizes/font_size = 8
 theme_override_styles/normal = SubResource("StyleBoxEmpty_gih0s")
 text = "Quit"
+flat = true
 
 [connection signal="pressed" from="Button_manager/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Button_manager/Settings" to="." method="_on_settings_pressed"]
