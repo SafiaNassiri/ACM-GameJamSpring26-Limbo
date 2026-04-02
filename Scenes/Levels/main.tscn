@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://cnkmwwugnw8pe" path="res://Assets/Sprites/Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetReliefDetail.png" id="10_d3pra"]
 [ext_resource type="Texture2D" uid="uid://88l22vyh2jt1" path="res://Assets/Sprites/Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetTowers.png" id="11_rrvv5"]
 [ext_resource type="Texture2D" uid="uid://d07nwibdm2616" path="res://Assets/Sprites/Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetWater.png" id="12_g8fqy"]
+[ext_resource type="Texture2D" uid="uid://coddt6jgnj4e5" path="res://Assets/Sprites/HomemadeAssets/Lava.png" id="15_kcwwr"]
 [ext_resource type="Script" uid="uid://dm3c67d7ek2i5" path="res://Scripts/Systems/FakeTutorial.gd" id="19_d3pra"]
 [ext_resource type="Script" uid="uid://cvmbslodvhj2t" path="res://Scripts/UI/FakeProgressBar.gd" id="20_2tpv6"]
 [ext_resource type="Script" uid="uid://qblb2k12l0b2" path="res://Scripts/Systems/Room2Trigger.gd" id="21_rrvv5"]
@@ -6001,6 +6002,13 @@ sources/7 = SubResource("TileSetAtlasSource_2tpv6")
 sources/8 = SubResource("TileSetAtlasSource_wnekd")
 sources/0 = SubResource("TileSetAtlasSource_f2lhe")
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_415y4"]
+texture = ExtResource("15_kcwwr")
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_c53t5"]
+sources/0 = SubResource("TileSetAtlasSource_415y4")
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_56s34"]
 bg_color = Color(9.144843e-06, 0.6617413, 0.8359639, 1)
 corner_radius_top_left = 3
@@ -6580,6 +6588,45 @@ size = Vector2(21, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tpbtn"]
 size = Vector2(15, 9)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kcwwr"]
+size = Vector2(16, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8i2ar"]
+size = Vector2(16, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_myo5v"]
+size = Vector2(16, 96)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ay6nb"]
+size = Vector2(16, 96)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hkc38"]
+size = Vector2(16, 96)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vworn"]
+size = Vector2(16, 96)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f2lhe"]
+size = Vector2(16, 96)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gv65w"]
+size = Vector2(16, 96)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_415y4"]
+size = Vector2(16, 112)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c53t5"]
+size = Vector2(32, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_70r5l"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7k7h7"]
+size = Vector2(48, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gx6dv"]
+size = Vector2(208, 16)
+
 [node name="Main" type="Node2D" unique_id=1789893899]
 script = ExtResource("1_hlgat")
 
@@ -6616,6 +6663,10 @@ tile_set = SubResource("TileSet_lv1w4")
 [node name="Bridge" type="TileMapLayer" parent="==TitleLayers==" unique_id=1336406086]
 tile_map_data = PackedByteArray("AAAKAA8AAAAIAAIAAAAKABAAAAAIAAIAAAAKABEAAAAIAAIAAAAKAA4AAAAIAAIAAAAKABIAAAAIAAIAAAA=")
 tile_set = SubResource("TileSet_d3pra")
+
+[node name="Lava" type="TileMapLayer" parent="==TitleLayers==" unique_id=581925366]
+tile_map_data = PackedByteArray("AAAYAAgAAAAAAAAAAAAZAAgAAAAAAAAAAAAaAAgAAAAAAAAAAAAbAAgAAAAAAAAAAAAcAAgAAAAAAAAAAAAdAAgAAAAAAAAAAAAeAAgAAAAAAAAAAAAfAAgAAAAAAAAAAAAgAAgAAAAAAAAAAAAhAAgAAAAAAAAAAAAiAAgAAAAAAAAAAAAjAAgAAAAAAAAAAAAkAAgAAAAAAAAAAAAlAAgAAAAAAAAAAAAVAAcAAAAAAAAAAAAlAAIAAAAAAAAAAAAlAAMAAAAAAAAAAAAlAAQAAAAAAAAAAAAlAAUAAAAAAAAAAAAlAAYAAAAAAAAAAAAlAAcAAAAAAAAAAAAjAAYAAAAAAAAAAAAjAAUAAAAAAAAAAAAjAAQAAAAAAAAAAAAjAAMAAAAAAAAAAAAjAAIAAAAAAAAAAAAjAAEAAAAAAAAAAAAhAAIAAAAAAAAAAAAhAAMAAAAAAAAAAAAhAAQAAAAAAAAAAAAhAAUAAAAAAAAAAAAhAAYAAAAAAAAAAAAhAAcAAAAAAAAAAAAfAAYAAAAAAAAAAAAfAAUAAAAAAAAAAAAfAAQAAAAAAAAAAAAfAAMAAAAAAAAAAAAfAAIAAAAAAAAAAAAfAAEAAAAAAAAAAAAdAAIAAAAAAAAAAAAdAAMAAAAAAAAAAAAdAAQAAAAAAAAAAAAdAAUAAAAAAAAAAAAdAAYAAAAAAAAAAAAdAAcAAAAAAAAAAAAbAAEAAAAAAAAAAAAbAAIAAAAAAAAAAAAbAAMAAAAAAAAAAAAbAAQAAAAAAAAAAAAbAAUAAAAAAAAAAAAbAAYAAAAAAAAAAAAZAAcAAAAAAAAAAAAZAAYAAAAAAAAAAAAZAAUAAAAAAAAAAAAZAAQAAAAAAAAAAAAZAAMAAAAAAAAAAAAZAAIAAAAAAAAAAAAVAAYAAAAAAAAAAAAWAAQAAAAAAAAAAAAVAAEAAAAAAAAAAAAVAAIAAAAAAAAAAAAVAAMAAAAAAAAAAAAXAAIAAAAAAAAAAAAXAAQAAAAAAAAAAAAWAAcAAAAAAAAAAAAXAAcAAAAAAAAAAAAYAAcAAAAAAAAAAAAXAAUAAAAAAAAAAAAYAAIAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_c53t5")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=987654321]
 position = Vector2(160, 88)
@@ -6846,5 +6897,111 @@ theme_override_fonts/font = ExtResource("32_6pxnm")
 theme_override_font_sizes/font_size = 8
 text = "By the way, you can press the [ESC] button to Pause the game at any time."
 autowrap_mode = 2
+
+[node name="LavaArea" type="Node2D" parent="." unique_id=1669127398]
+
+[node name="Area2D" type="Area2D" parent="LavaArea" unique_id=979282023]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LavaArea/Area2D" unique_id=836760864]
+position = Vector2(344, 40)
+shape = SubResource("RectangleShape2D_kcwwr")
+debug_color = Color(0.5340118, 0.41134882, 1, 0.41960785)
+
+[node name="Area2D2" type="Area2D" parent="LavaArea" unique_id=1176278010]
+position = Vector2(0, 64)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LavaArea/Area2D2" unique_id=1919007284]
+position = Vector2(344, 48)
+shape = SubResource("RectangleShape2D_8i2ar")
+debug_color = Color(0.5340118, 0.41134882, 1, 0.41960785)
+
+[node name="Area2D3" type="Area2D" parent="LavaArea" unique_id=1138639108]
+position = Vector2(32, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LavaArea/Area2D3" unique_id=1656936520]
+position = Vector2(344, 48)
+shape = SubResource("RectangleShape2D_8i2ar")
+debug_color = Color(0.5340118, 0.41134882, 1, 0.41960785)
+
+[node name="Area2D4" type="Area2D" parent="LavaArea" unique_id=822476449]
+position = Vector2(64, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LavaArea/Area2D4" unique_id=1865972585]
+position = Vector2(344, 80)
+shape = SubResource("RectangleShape2D_myo5v")
+debug_color = Color(0.5340118, 0.41134882, 1, 0.41960785)
+
+[node name="Area2D5" type="Area2D" parent="LavaArea" unique_id=103001382]
+position = Vector2(96, -16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LavaArea/Area2D5" unique_id=1356700506]
+position = Vector2(344, 80)
+shape = SubResource("RectangleShape2D_ay6nb")
+debug_color = Color(0.5340118, 0.41134882, 1, 0.41960785)
+
+[node name="Area2D6" type="Area2D" parent="LavaArea" unique_id=308232938]
+position = Vector2(128, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LavaArea/Area2D6" unique_id=1380130485]
+position = Vector2(344, 80)
+shape = SubResource("RectangleShape2D_hkc38")
+debug_color = Color(0.5340118, 0.41134882, 1, 0.41960785)
+
+[node name="Area2D7" type="Area2D" parent="LavaArea" unique_id=2097386453]
+position = Vector2(160, -16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LavaArea/Area2D7" unique_id=953966095]
+position = Vector2(344, 80)
+shape = SubResource("RectangleShape2D_vworn")
+debug_color = Color(0.5340118, 0.41134882, 1, 0.41960785)
+
+[node name="Area2D8" type="Area2D" parent="LavaArea" unique_id=1979933448]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LavaArea/Area2D8" unique_id=510118807]
+position = Vector2(536, 80)
+shape = SubResource("RectangleShape2D_f2lhe")
+debug_color = Color(0.5340118, 0.41134882, 1, 0.41960785)
+
+[node name="Area2D9" type="Area2D" parent="LavaArea" unique_id=1306457520]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LavaArea/Area2D9" unique_id=871493601]
+position = Vector2(568, 64)
+shape = SubResource("RectangleShape2D_gv65w")
+debug_color = Color(0.5340118, 0.41134882, 1, 0.41960785)
+
+[node name="Area2D10" type="Area2D" parent="LavaArea" unique_id=1755912607]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LavaArea/Area2D10" unique_id=1737509317]
+position = Vector2(600, 88)
+shape = SubResource("RectangleShape2D_415y4")
+debug_color = Color(0.5340118, 0.41134882, 1, 0.41960785)
+
+[node name="Area2D11" type="Area2D" parent="LavaArea" unique_id=248745086]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LavaArea/Area2D11" unique_id=146710449]
+position = Vector2(384, 40)
+shape = SubResource("RectangleShape2D_c53t5")
+debug_color = Color(0.5340118, 0.41134882, 1, 0.41960785)
+
+[node name="Area2D12" type="Area2D" parent="LavaArea" unique_id=142100726]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LavaArea/Area2D12" unique_id=1432931123]
+position = Vector2(360, 72)
+shape = SubResource("RectangleShape2D_70r5l")
+debug_color = Color(0.5340118, 0.41134882, 1, 0.41960785)
+
+[node name="Area2D13" type="Area2D" parent="LavaArea" unique_id=1074923298]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LavaArea/Area2D13" unique_id=555508573]
+position = Vector2(376, 120)
+shape = SubResource("RectangleShape2D_7k7h7")
+debug_color = Color(0.5340118, 0.41134882, 1, 0.41960785)
+
+[node name="Area2D14" type="Area2D" parent="LavaArea" unique_id=1959743370]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LavaArea/Area2D14" unique_id=769854443]
+position = Vector2(488, 136)
+shape = SubResource("RectangleShape2D_gx6dv")
+debug_color = Color(0.5340118, 0.41134882, 1, 0.41960785)
 
 [editable path="Player"]
