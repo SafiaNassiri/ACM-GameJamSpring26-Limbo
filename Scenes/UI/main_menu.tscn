@@ -620,9 +620,9 @@ grow_vertical = 2
 
 [node name="Play" type="Button" parent="Button_manager" unique_id=389393847]
 layout_mode = 0
-offset_left = 104.0
+offset_left = 108.0
 offset_top = 83.0
-offset_right = 204.0
+offset_right = 208.0
 offset_bottom = 103.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_o14dv")
@@ -633,9 +633,9 @@ flat = true
 
 [node name="Settings" type="Button" parent="Button_manager" unique_id=1048591056]
 layout_mode = 0
-offset_left = 104.0
+offset_left = 108.0
 offset_top = 115.0
-offset_right = 204.0
+offset_right = 208.0
 offset_bottom = 135.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_o14dv")
@@ -646,9 +646,9 @@ flat = true
 
 [node name="Quit" type="Button" parent="Button_manager" unique_id=679311846]
 layout_mode = 0
-offset_left = 104.0
+offset_left = 108.0
 offset_top = 147.0
-offset_right = 204.0
+offset_right = 208.0
 offset_bottom = 167.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_o14dv")

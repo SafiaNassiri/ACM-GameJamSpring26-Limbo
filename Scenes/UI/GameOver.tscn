@@ -1,11 +1,11 @@
-[gd_scene format=4 uid="uid://bttlem0ed3nd"]
+[gd_scene format=4 uid="uid://cmd3gsv7v188f"]
 
-[ext_resource type="Script" uid="uid://wtjiwlcds08v" path="res://Scripts/UI/background_2.gd" id="1_ag10f"]
-[ext_resource type="Texture2D" uid="uid://bwbcj5sfvmsdd" path="res://Assets/Sprites/black.jpg" id="2_ag10f"]
-[ext_resource type="FontFile" uid="uid://bskgxhwpgcggv" path="res://Assets/Fonts/Code 8x8.ttf" id="3_ag10f"]
+[ext_resource type="Script" uid="uid://q53wrdamtvfw" path="res://Scripts/UI/game_ove.gd" id="1_34bmr"]
+[ext_resource type="Texture2D" uid="uid://bwbcj5sfvmsdd" path="res://Assets/Sprites/black.jpg" id="2_wpfos"]
+[ext_resource type="FontFile" uid="uid://bskgxhwpgcggv" path="res://Assets/Fonts/Code 8x8.ttf" id="3_ielvo"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ycc34"]
-texture = ExtResource("2_ag10f")
+texture = ExtResource("2_wpfos")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -8053,7 +8053,7 @@ sources/0 = SubResource("TileSetAtlasSource_ycc34")
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ok5o0"]
 
 [node name="Background" type="Node2D" unique_id=1126352257]
-script = ExtResource("1_ag10f")
+script = ExtResource("1_34bmr")
 
 [node name="Control" type="Control" parent="." unique_id=633515288]
 layout_mode = 3
@@ -8071,18 +8071,20 @@ tile_set = SubResource("TileSet_ok5o0")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Control" unique_id=1907792450]
 layout_mode = 0
-offset_left = 7.0
+offset_left = 4.0
 offset_top = 6.0
-offset_right = 312.0
-offset_bottom = 176.0
+offset_right = 317.0
+offset_bottom = 152.0
 theme_override_colors/default_color = Color(1, 1, 0, 1)
-theme_override_fonts/normal_font = ExtResource("3_ag10f")
+theme_override_fonts/normal_font = ExtResource("3_ielvo")
 theme_override_font_sizes/normal_font_size = 8
 theme_override_font_sizes/bold_font_size = 8
 theme_override_font_sizes/bold_italics_font_size = 8
 theme_override_font_sizes/italics_font_size = 8
 theme_override_font_sizes/mono_font_size = 8
-text = "When you wake up you are standing in a white room. A disembodied voice introduces itself as Zyra, Architect, Sovereign, Supreme Intelligence of the Realm, and made it very clear that it was bored, that this was now YOUR problem, and that the last QA tester to disappoint it has been saying \"Hey you, you're finaly awake\" to strangers since 2011 and was not handling it well."
+text = "Stepping through the exit door, you find your self back in your office chair staring at your computer screen.
+You sat there for a moment, blinking. Your coffee was cold. Your monitor looked normal. The error message still blinked patiently in the corner of the screen like nothing had happened, because as far as the building was concerned, nothing had.
+You crack your knuckles and opened a new incident ticket."
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -8100,10 +8102,10 @@ offset_bottom = -3.0
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_colors/font_color = Color(0.91091406, 0.9139442, 0, 1)
-theme_override_fonts/font = ExtResource("3_ag10f")
+theme_override_fonts/font = ExtResource("3_ielvo")
 theme_override_font_sizes/font_size = 10
 theme_override_styles/normal = SubResource("StyleBoxEmpty_ok5o0")
-text = "continue"
+text = "Continue"
 flat = true
 
 [connection signal="gui_input" from="Control/RichTextLabel" to="." method="_on_rich_text_label_gui_input"]

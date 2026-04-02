@@ -1,233 +1,233 @@
 {
-    "ambient_lines": [
-        "*clears throat*",
-        "...",
-        "Still here.",
-        "Take your time. Really.",
-        "No rush. We've got all day. All week, actually.",
-        "I've seen worse. Well. No I haven't.",
-        "My feet hurt. Just so you know.",
-        "You know, most people give up by now.",
-        "The door's not going to open itself.",
-        "I admire the persistence. I don't respect it, but I admire it.",
-        "My shift ends never, in case you were wondering.",
-        "Fascinating. Truly.",
-        "Hmm.",
-        "Yep.",
-        "...Heh.",
-        "I've started bringing a book. It's a good book.",
+	"ambient_lines": [
+		"*clears throat*",
+		"...",
+		"Still here.",
+		"Take your time. Really.",
+		"No rush. We've got all day. All week, actually.",
+		"I've seen worse. Well. No I haven't.",
+		"My feet hurt. Just so you know.",
+		"You know, most people give up by now.",
+		"The door's not going to open itself.",
+		"I admire the persistence. I don't respect it, but I admire it.",
+		"My shift ends never, in case you were wondering.",
+		"Fascinating. Truly.",
+		"Hmm.",
+		"Yep.",
+		"...Heh.",
+		"I've started bringing a book. It's a good book.",
 		"You're doing great. That was a lie."
-    ],
-    "nodes": {
-        "proximity_first": {
-            "id": "proximity_first",
-            "speaker": "Mr. Greene",
-            "line": "Oh. Another one.",
-            "next": "proximity_first_b"
-        },
-        "proximity_first_b": {
-            "id": "proximity_first_b",
-            "speaker": "Mr. Greene",
-            "line": "They always look so confident walking up. Heh.",
-            "next": "END"
-        },
+	],
+	"nodes": {
+		"proximity_first": {
+			"id": "proximity_first",
+			"speaker": "Mr. Greene",
+			"line": "Oh. Another one.",
+			"next": "proximity_first_b"
+		},
+		"proximity_first_b": {
+			"id": "proximity_first_b",
+			"speaker": "Mr. Greene",
+			"line": "They always look so confident walking up. Heh.",
+			"next": "END"
+		},
 
-        "proximity_repeat": {
-            "id": "proximity_repeat",
-            "speaker": "Mr. Greene",
-            "line": [
-                "Back again. Lovely.",
-                "Oh, you're still trying. Good for you.",
-                "We didn't forget you. Unfortunately.",
-                "I told my colleague you'd be back. He owes me lunch.",
+		"proximity_repeat": {
+			"id": "proximity_repeat",
+			"speaker": "Mr. Greene",
+			"line": [
+				"Back again. Lovely.",
+				"Oh, you're still trying. Good for you.",
+				"We didn't forget you. Unfortunately.",
+				"I told my colleague you'd be back. He owes me lunch.",
 				"Pfft. Yep. Still here. Still you."
-            ],
-            "next": "END"
-        },
+			],
+			"next": "END"
+		},
 
-        "ambient_idle": {
-            "speaker": "Mr. Greene",
-            "line": "{ambient_line}",
-            "next": "END"
-        },
+		"ambient_idle": {
+			"speaker": "Mr. Greene",
+			"line": "{ambient_line}",
+			"next": "END"
+		},
 
-        "death_first": {
-            "id": "death_first",
-            "speaker": "Mr. Greene",
-            "line": "Oh. That was rough. Don't worry — that was just a warmup.",
-            "next": "death_first_b"
-        },
-        "death_first_b": {
-            "id": "death_first_b",
-            "speaker": "Mr. Greene",
-            "line": "I see everything, by the way. I have nothing else to do.",
-            "next": "END"
-        },
+		"death_first": {
+			"id": "death_first",
+			"speaker": "Mr. Greene",
+			"line": "Oh. That was rough. Don't worry — that was just a warmup.",
+			"next": "death_first_b"
+		},
+		"death_first_b": {
+			"id": "death_first_b",
+			"speaker": "Mr. Greene",
+			"line": "I see everything, by the way. I have nothing else to do.",
+			"next": "END"
+		},
 
-        "death_repeat": {
-            "id": "death_repeat",
-            "speaker": "Mr. Greene",
-            "line": [
-                "Again! You're getting WORSE.",
-                "Ooooh, so close. Not really, but we say that.",
-                "That one looked painful. Emotionally, I mean.",
-                "At this rate we'll be here forever. We ARE here forever. This rules.",
+		"death_repeat": {
+			"id": "death_repeat",
+			"speaker": "Mr. Greene",
+			"line": [
+				"Again! You're getting WORSE.",
+				"Ooooh, so close. Not really, but we say that.",
+				"That one looked painful. Emotionally, I mean.",
+				"At this rate we'll be here forever. We ARE here forever. This rules.",
 				"I've been keeping count. You want to know the number?"
-            ],
-            "next": "death_repeat_b"
-        },
-        "death_repeat_b": {
-            "id": "death_repeat_b",
-            "speaker": "Mr. Greene",
-            "line": [
-                "Death count: {death_count}. Just so you have a number to reflect on.",
-                "Curious. You keep doing the same thing expecting different results.",
-                "Each attempt is progress. You're learning what doesn't work.",
-                "I have started to feel something watching you. I believe it is pity.",
+			],
+			"next": "death_repeat_b"
+		},
+		"death_repeat_b": {
+			"id": "death_repeat_b",
+			"speaker": "Mr. Greene",
+			"line": [
+				"Death count: {death_count}. Just so you have a number to reflect on.",
+				"Curious. You keep doing the same thing expecting different results.",
+				"Each attempt is progress. You're learning what doesn't work.",
+				"I have started to feel something watching you. I believe it is pity.",
 				"Do you have a plan, or is this purely improvisational?"
-            ],
-            "next": "END"
-        },
+			],
+			"next": "END"
+		},
 
-        "death_milestone_10": {
-            "id": "death_milestone_10",
-            "condition": { "counter": "deaths", "gte": 10 },
-            "speaker": "Mr. Greene",
-            "line": "Ten times. TEN. I mentally made a little cake for this moment.",
-            "next": "death_milestone_10_b",
-            "else": "END"
-        },
-        "death_milestone_10_b": {
-            "id": "death_milestone_10_b",
-            "speaker": "Mr. Greene",
-            "line": "I considered saying something encouraging. I decided against it.",
-            "next": "END"
-        },
+		"death_milestone_10": {
+			"id": "death_milestone_10",
+			"condition": { "counter": "deaths", "gte": 10 },
+			"speaker": "Mr. Greene",
+			"line": "Ten times. TEN. I mentally made a little cake for this moment.",
+			"next": "death_milestone_10_b",
+			"else": "END"
+		},
+		"death_milestone_10_b": {
+			"id": "death_milestone_10_b",
+			"speaker": "Mr. Greene",
+			"line": "I considered saying something encouraging. I decided against it.",
+			"next": "END"
+		},
 
-        "death_milestone_25": {
-            "id": "death_milestone_25",
-            "condition": { "counter": "deaths", "gte": 25 },
-            "speaker": "Mr. Greene",
-            "line": "Twenty-five. I want you to know I have started to respect this. Slightly.",
-            "next": "END",
-            "else": "END"
-        },
+		"death_milestone_25": {
+			"id": "death_milestone_25",
+			"condition": { "counter": "deaths", "gte": 25 },
+			"speaker": "Mr. Greene",
+			"line": "Twenty-five. I want you to know I have started to respect this. Slightly.",
+			"next": "END",
+			"else": "END"
+		},
 
-        "death_milestone_50": {
-            "id": "death_milestone_50",
-            "condition": { "counter": "deaths", "gte": 50 },
-            "speaker": "Mr. Greene",
-            "line": "Fifty deaths. I have been standing here watching you for longer than some entire careers.",
-            "next": "death_milestone_50_b",
-            "else": "END"
-        },
-        "death_milestone_50_b": {
-            "id": "death_milestone_50_b",
-            "speaker": "Mr. Greene",
-            "line": "...I'm not even laughing anymore. I'm in awe. Okay no I'm still laughing. Heheheh.",
-            "next": "END"
-        },
+		"death_milestone_50": {
+			"id": "death_milestone_50",
+			"condition": { "counter": "deaths", "gte": 50 },
+			"speaker": "Mr. Greene",
+			"line": "Fifty deaths. I have been standing here watching you for longer than some entire careers.",
+			"next": "death_milestone_50_b",
+			"else": "END"
+		},
+		"death_milestone_50_b": {
+			"id": "death_milestone_50_b",
+			"speaker": "Mr. Greene",
+			"line": "...I'm not even laughing anymore. I'm in awe. Okay no I'm still laughing. Heheheh.",
+			"next": "END"
+		},
 
-        "player_talks": {
-            "id": "player_talks",
-            "speaker": "Mr. Greene",
-            "line": "You want help. You're asking ME for help.",
-            "next": "player_talks_choices"
-        },
-        "player_talks_choices": {
-            "id": "player_talks_choices",
-            "speaker": "Mr. Greene",
-            "line": "I could offer... advice. Of a kind.",
-            "choices": [
-                { "text": "Yes please, any tips?",   "next": "hint_bad_a" },
-                { "text": "What's behind the door?", "next": "hint_door" },
-                { "text": "Never mind.",              "next": "hint_refuse" }
-            ]
-        },
+		"player_talks": {
+			"id": "player_talks",
+			"speaker": "Mr. Greene",
+			"line": "You want help. You're asking ME for help.",
+			"next": "player_talks_choices"
+		},
+		"player_talks_choices": {
+			"id": "player_talks_choices",
+			"speaker": "Mr. Greene",
+			"line": "I could offer... advice. Of a kind.",
+			"choices": [
+				{ "text": "Yes please, any tips?",   "next": "hint_bad_a" },
+				{ "text": "What's behind the door?", "next": "hint_door" },
+				{ "text": "Never mind.",              "next": "hint_refuse" }
+			]
+		},
 
-        "hint_bad_a": {
-            "id": "hint_bad_a",
-            "speaker": "Mr. Greene",
-            "line": "Go faster. Much faster. Commitment is the key. Do not hesitate.",
-            "next": "hint_bad_a_b"
-        },
-        "hint_bad_a_b": {
-            "id": "hint_bad_a_b",
-            "speaker": "Mr. Greene",
-            "line": "Speed. That's the thing. Trust me.",
-            "next": "END"
-        },
+		"hint_bad_a": {
+			"id": "hint_bad_a",
+			"speaker": "Mr. Greene",
+			"line": "Go faster. Much faster. Commitment is the key. Do not hesitate.",
+			"next": "hint_bad_a_b"
+		},
+		"hint_bad_a_b": {
+			"id": "hint_bad_a_b",
+			"speaker": "Mr. Greene",
+			"line": "Speed. That's the thing. Trust me.",
+			"next": "END"
+		},
 
-        "hint_door": {
-            "id": "hint_door",
-            "speaker": "Mr. Greene",
-            "line": "Something wonderful.",
-            "next": "hint_door_b"
-        },
-        "hint_door_b": {
-            "id": "hint_door_b",
-            "speaker": "Mr. Greene",
-            "line": "You'll find out. Theoretically.",
-            "next": "END"
-        },
+		"hint_door": {
+			"id": "hint_door",
+			"speaker": "Mr. Greene",
+			"line": "Something wonderful.",
+			"next": "hint_door_b"
+		},
+		"hint_door_b": {
+			"id": "hint_door_b",
+			"speaker": "Mr. Greene",
+			"line": "You'll find out. Theoretically.",
+			"next": "END"
+		},
 
-        "hint_refuse": {
-            "id": "hint_refuse",
-            "speaker": "Mr. Greene",
-            "line": "Sure you don't. Good luck.",
-            "next": "END"
-        },
+		"hint_refuse": {
+			"id": "hint_refuse",
+			"speaker": "Mr. Greene",
+			"line": "Sure you don't. Good luck.",
+			"next": "END"
+		},
 
-        "ambient_struggle": {
-            "id": "ambient_struggle",
-            "speaker": "Mr. Greene",
-            "line": [
-                "Oooh — no. No no. Aaand no.",
-                "So close. Again.",
-                "That gap was RIGHT THERE.",
-                "Almost! Heh, no it wasn't.",
+		"ambient_struggle": {
+			"id": "ambient_struggle",
+			"speaker": "Mr. Greene",
+			"line": [
+				"Oooh — no. No no. Aaand no.",
+				"So close. Again.",
+				"That gap was RIGHT THERE.",
+				"Almost! Heh, no it wasn't.",
 				"One day. Maybe. Heheheh."
-            ],
-            "next": "END"
-        },
-        "ambient_struggle_grim": {
-            "id": "ambient_struggle_grim",
-            "speaker": "Mr. Greene",
-            "line": [
-                "The obstacle does not change. Consider why you keep changing your approach.",
-                "Hmm.",
-                "Persistent.",
-                "I have begun to wonder if you enjoy this.",
+			],
+			"next": "END"
+		},
+		"ambient_struggle_grim": {
+			"id": "ambient_struggle_grim",
+			"speaker": "Mr. Greene",
+			"line": [
+				"The obstacle does not change. Consider why you keep changing your approach.",
+				"Hmm.",
+				"Persistent.",
+				"I have begun to wonder if you enjoy this.",
 				"Watching this has given me a new appreciation for stillness."
-            ],
-            "next": "END"
-        },
+			],
+			"next": "END"
+		},
 
-        "greene_revealed": {
-            "id": "greene_revealed",
-            "speaker": "Mr. Greene",
-            "line": "You could have won this whole time if only you pressed: Lightning, Red-X, Egg, Heart, Lightning!",
-            "next": "END"
-        },
+		"greene_revealed": {
+			"id": "greene_revealed",
+			"speaker": "Mr. Greene",
+			"line": "You could have won this whole time if only you pressed: Lightning, Red-X, Egg, Heart, Lightning!",
+			"next": "END"
+		},
 
-        "player_wins": {
-            "id": "player_wins",
-            "speaker": "Mr. Greene",
-            "line": "Wait — what? WHAT.",
-            "next": "player_wins_b"
-        },
-        "player_wins_b": {
-            "id": "player_wins_b",
-            "speaker": "Mr. Greene",
-            "line": "...Hm.",
-            "next": "player_wins_c"
-        },
-        "player_wins_c": {
-            "id": "player_wins_c",
-            "speaker": "Mr. Greene",
-            "line": "I feel something I cannot name. I believe it is... respect. Go. Before it passes.",
-            "trigger": { "type": "emote", "animation": "greene_nod" },
-            "next": "END"
-        }
-    }
+		"player_wins": {
+			"id": "player_wins",
+			"speaker": "Mr. Greene",
+			"line": "Wait — what? WHAT.",
+			"next": "player_wins_b"
+		},
+		"player_wins_b": {
+			"id": "player_wins_b",
+			"speaker": "Mr. Greene",
+			"line": "...Hm.",
+			"next": "player_wins_c"
+		},
+		"player_wins_c": {
+			"id": "player_wins_c",
+			"speaker": "Mr. Greene",
+			"line": "I feel something I cannot name. I believe it is... respect. Go. Before it passes.",
+			"trigger": { "type": "emote", "animation": "greene_nod" },
+			"next": "END"
+		}
+	}
 }
